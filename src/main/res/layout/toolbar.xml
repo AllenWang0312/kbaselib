@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/toolbar"
+    android:layout_width="match_parent"
+    android:background="@color/colorPrimary"
+    android:layout_height="@dimen/actionBarSize">
+
+    <ImageView
+        android:id="@+id/iv_left"
+        android:visibility="gone"
+        android:layout_width="36dp"
+        android:layout_height="36dp"
+        android:layout_gravity="center_vertical"
+        android:padding="9dp"
+        android:layout_marginLeft="8dp"/>
+
+    <ImageView
+        android:id="@+id/iv_left2"
+        android:visibility="gone"
+        android:layout_width="36dp"
+        android:layout_height="36dp"
+        android:padding="9dp"
+        android:layout_gravity="center_vertical"
+        android:layout_marginLeft="48dp"/>
+
+    <TextView
+        android:id="@+id/tv_left"
+        android:visibility="gone"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:layout_gravity="center_vertical"
+        android:layout_marginLeft="15dp"
+        tools:text="left"
+        />
+
+    <TextView
+        android:id="@+id/title"
+        android:visibility="gone"
+        android:layout_gravity="center"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/title_text_color"
+        android:textSize="@dimen/title_text_size"
+        android:maxEms="12"
+        tools:text="title"/>
+
+    <TextView
+        android:id="@+id/tv_right"
+        android:layout_gravity="right"
+        android:padding="4dp"
+        android:visibility="gone"
+        android:layout_marginRight="15dp"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        tools:text="right"/>
+
+    <ImageView
+        android:id="@+id/iv_right2"
+        android:layout_width="36dp"
+        android:visibility="gone"
+        android:layout_height="36dp"
+        android:layout_gravity="right|center_vertical"
+        android:padding="9dp"
+        android:layout_marginRight="48dp"/>
+
+    <ImageView
+        android:id="@+id/iv_right"
+        android:layout_width="36dp"
+        android:layout_height="36dp"
+        android:visibility="gone"
+        android:layout_gravity="right|center_vertical"
+        android:padding="9dp"
+        android:layout_marginRight="8dp"/>
+
+</FrameLayout>

@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical"
+              android:fitsSystemWindows="true"
+    >
+
+    <include layout="@layout/toolbar"></include>
+
+    <include layout="@layout/deliver"></include>
+    <!--<View-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="30dp"-->
+    <!--android:background="#3ea0e6"/>-->
+
+    <!--<RelativeLayout-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="@dimen/y26_5"-->
+    <!--android:background="#3ea0e6">-->
+
+    <!--<RelativeLayout-->
+    <!--android:id="@+id/rlconsultation_detail_back"-->
+    <!--android:layout_width="@dimen/x37"-->
+    <!--android:layout_height="match_parent">-->
+
+    <!--<ImageView-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_centerInParent="true"-->
+    <!--android:layout_centerVertical="true"-->
+    <!--android:src="@drawable/mine_arrow_left_white" />-->
+    <!--</RelativeLayout>-->
+
+
+    <!--<TextView-->
+    <!--android:id="@+id/titlee"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_centerInParent="true"-->
+    <!--android:text="服务条款"-->
+    <!--android:textColor="#ffffff"-->
+    <!--android:textSize="17sp" />-->
+
+    <!--</RelativeLayout>-->
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <ProgressBar
+            android:id="@+id/progress"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <WebView
+            android:id="@+id/webview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scrollbars="none">
+
+        </WebView>
+
+        <Button
+            android:id="@+id/bt_bottom"
+            style="@style/button_positive_square_style"
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:visibility="gone"
+            android:layout_gravity="bottom"
+            tools:text="立即报考"/>
+    </FrameLayout>
+
+</LinearLayout>

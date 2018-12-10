@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+    <corners android:radius="@dimen/button_radius"></corners>
+
+    <!--<solid android:color="@color/button_positive_color"></solid>-->
+    <gradient
+        android:angle="45"
+        android:startColor="@color/button_positive_startcolor"
+        android:centerColor="@color/colorPrimary"
+        android:endColor="@color/button_positive_endcolor"
+
+        ></gradient>
+</shape>
