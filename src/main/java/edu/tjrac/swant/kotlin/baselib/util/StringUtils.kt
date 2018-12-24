@@ -68,6 +68,7 @@ class StringUtils private constructor() {
 //            return m.matches()
         }
 
+
         //验证手机格式
         fun isMobileNO(type: String, mobiles: String): Boolean {
             Log.i("isMobileNo",type+"_"+mobiles)
@@ -95,7 +96,25 @@ class StringUtils private constructor() {
             }
         }
 
+        fun  getValueByName( url:String,  name:String):String {
+            var result = ""
+            var  index = url.indexOf("?")
+            var  temp = url.substring(index + 1)
 
+            if(temp.contains("&")){
+                var  keyValue = temp.split("&")
+                for ( str in keyValue) {
+                    if (str.contains(name)) {
+                        result = str.replace(name + "=", "");
+                        break
+                    }
+                }
+            }else{
+                result = temp.replace(name + "=", "");
+            }
+
+            return result
+        }
         /**
          * 判断是不是一个合法的电子邮件地址
 
