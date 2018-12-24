@@ -1,7 +1,7 @@
 package edu.tjrac.swant.kotlin.baselib.common
 
+import android.app.Activity
 import android.app.Application
-import java.util.*
 
 /**
  * Created by wpc on 2018-08-02.
