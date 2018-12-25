@@ -100,19 +100,13 @@ class StringUtils private constructor() {
             var result = ""
             var  index = url.indexOf("?")
             var  temp = url.substring(index + 1)
-
-            if(temp.contains("&")){
-                var  keyValue = temp.split("&")
-                for ( str in keyValue) {
-                    if (str.contains(name)) {
-                        result = str.replace(name + "=", "");
-                        break
-                    }
+            var  keyValue = temp.split("&")
+            for ( str in keyValue) {
+                if (str.contains(name)) {
+                    result = str.replace(name + "=", "");
+                    break
                 }
-            }else{
-                result = temp.replace(name + "=", "");
             }
-
             return result
         }
         /**
