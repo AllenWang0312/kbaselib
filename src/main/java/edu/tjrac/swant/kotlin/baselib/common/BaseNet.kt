@@ -19,9 +19,9 @@ open class BaseNet{
          var sOkHttpClient: OkHttpClient? = null
     }
 
-    private val mRetrofitLock = Object()
+    protected val mRetrofitLock = Object()
 
-    fun getRetrofit(url: String): Retrofit? {
+   open fun getRetrofit(url: String): Retrofit? {
         synchronized(mRetrofitLock) {
             if (null === retrofitMap.get(url)) {
                 var retrofit = Retrofit.Builder().client(getOkHttpClient())

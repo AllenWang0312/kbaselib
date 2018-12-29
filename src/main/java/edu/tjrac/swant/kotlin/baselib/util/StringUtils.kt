@@ -49,6 +49,25 @@ class StringUtils private constructor() {
             return span
         }
 
+        //判断整数（int）
+         fun isInteger(str: String?): Boolean {
+            if (null == str || "" == str) {
+                return false
+            }
+            val pattern = Pattern.compile("^[-\\+]?[\\d]*$")
+            return pattern.matcher(str).matches()
+        }
+
+        //判断浮点数（double和float）
+         fun isDouble(str: String?): Boolean {
+            if (null == str || "" == str) {
+                return false
+            }
+            val pattern = Pattern.compile("^[-\\+]?[.\\d]*$")
+            return pattern.matcher(str).matches()
+        }
+
+
         fun isSupportPhoneNum(type: String, phone: String): Boolean {
             var pattern = ""
             when (type) {
@@ -71,7 +90,7 @@ class StringUtils private constructor() {
 
         //验证手机格式
         fun isMobileNO(type: String, mobiles: String): Boolean {
-            Log.i("isMobileNo",type+"_"+mobiles)
+            Log.i("isMobileNo", type + "_" + mobiles)
             var telRegex: String
             when (type) {
                 "+86"//中国大陆
@@ -86,22 +105,22 @@ class StringUtils private constructor() {
             }
             //"[1]"代表第1位为数字1，"[358]"代表第二位可以为3、5、8中的一个，"\\d{9}"代表后面是可以是0～9的数字，有9位。
             if (isEmpty(mobiles)) {
-                Log.i("isMobileNo",type+"_"+mobiles+false)
+                Log.i("isMobileNo", type + "_" + mobiles + false)
                 return false
             } else {
-                var result=mobiles.matches(telRegex.toRegex())
-                Log.i("isMobileNo",type+"_"+mobiles+result)
+                var result = mobiles.matches(telRegex.toRegex())
+                Log.i("isMobileNo", type + "_" + mobiles + result)
 
                 return result
             }
         }
 
-        fun  getValueByName( url:String,  name:String):String {
+        fun getValueByName(url: String, name: String): String {
             var result = ""
-            var  index = url.indexOf("?")
-            var  temp = url.substring(index + 1)
-            var  keyValue = temp.split("&")
-            for ( str in keyValue) {
+            var index = url.indexOf("?")
+            var temp = url.substring(index + 1)
+            var keyValue = temp.split("&")
+            for (str in keyValue) {
                 if (str.contains(name)) {
                     result = str.replace(name + "=", "");
                     break
@@ -109,6 +128,7 @@ class StringUtils private constructor() {
             }
             return result
         }
+
         /**
          * 判断是不是一个合法的电子邮件地址
 
