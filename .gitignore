@@ -5,8 +5,8 @@
 *.bat
 .gradle
 
-*/build/
-*/.idea/
+/build
+*/.idea
 
 .DS_Store
 *.iml
