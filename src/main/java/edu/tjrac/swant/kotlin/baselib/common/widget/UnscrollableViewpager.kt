@@ -1,6 +1,5 @@
 package edu.tjrac.swant.kotlin.baselib.common.widget
 
-import android.annotation.SuppressLint
 import android.content.Context
 import android.support.v4.view.ViewPager
 import android.util.AttributeSet
@@ -32,7 +31,7 @@ class UnscrollableViewpager : ViewPager {
         super.scrollTo(x, y)
     }
 
-    @SuppressLint("ClickableViewAccessibility")
+//    @SuppressLint("ClickableViewAccessibility")
     override fun onTouchEvent(arg0: MotionEvent): Boolean {
         if (noScroll)
             return false

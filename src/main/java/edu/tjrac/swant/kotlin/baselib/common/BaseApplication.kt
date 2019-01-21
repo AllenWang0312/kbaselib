@@ -1,6 +1,5 @@
 package edu.tjrac.swant.kotlin.baselib.common
 
-import android.app.Activity
 import android.app.Application
 
 /**
@@ -38,7 +37,7 @@ abstract class BaseApplication : Application() {
 
     companion object {
 
-        public open var instance: BaseApplication? = null
+        public  var instance: BaseApplication? = null
             set
     }
 

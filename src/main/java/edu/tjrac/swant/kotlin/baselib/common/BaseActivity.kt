@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.app.Dialog
 import android.content.Context
 import android.content.pm.ActivityInfo
+import android.content.res.TypedArray
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.util.Log
@@ -44,9 +45,27 @@ abstract class BaseActivity : AppCompatActivity(), BaseContextView {
     }
 
     protected fun setOrientation() {
-        requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT          //竖屏
+        if(isTranslucentOrFloating()){//android 8.0 透明activity 不能设置方向
+            requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED          //跟随父activity
+        }else{
+            requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT          //竖屏
+        }
     }
+    private fun isTranslucentOrFloating(): Boolean {
+        var isTranslucentOrFloating = false
+        try {
+            val styleableRes = Class.forName("com.android.internal.R\$styleable").getField("Window").get(null) as IntArray
+            val ta = obtainStyledAttributes(styleableRes)
+            val m = ActivityInfo::class.java!!.getMethod("isTranslucentOrFloating", TypedArray::class.java)
+            m.setAccessible(true)
+            isTranslucentOrFloating = m.invoke(null, ta) as Boolean
+            m.setAccessible(false)
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
 
+        return isTranslucentOrFloating
+    }
     open fun initStatusBar() {
 //        UiUtil.setStatusTextColor(true, this)
         StatusBarUtil.setLightMode(this)
@@ -107,11 +126,26 @@ abstract class BaseActivity : AppCompatActivity(), BaseContextView {
 
     override fun onResume() {
         super.onResume()
+        try {
+            val aClass = Class.forName("com.umeng.analytics.MobclickAgent")
+            var getter = aClass.getDeclaredMethod("onResume", Context::class.java)
+            getter.invoke(aClass.newInstance(), this)
+        } catch (e: ClassNotFoundException) {
+            e.printStackTrace()
+        }
+
         Log.e(this.javaClass.simpleName, "onResume")
     }
 
     override fun onPause() {
         super.onPause()
+        try {
+            val aClass = Class.forName("com.umeng.analytics.MobclickAgent")
+            var getter = aClass.getDeclaredMethod("onPause", Context::class.java)
+            getter.invoke(aClass.newInstance(), this)
+        } catch (e: ClassNotFoundException) {
+            e.printStackTrace()
+        }
         Log.e(this.javaClass.simpleName, "onPause")
     }
 
