@@ -19,8 +19,9 @@ repositories {
 
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
-//apply plugin: 'com.github.dcendents.android-maven'
-//group = 'com.github.swant'
+
+apply plugin: 'com.github.dcendents.android-maven'
+group = 'com.github.OoswantoO'
 
 
 android {
@@ -70,7 +71,7 @@ dependencies {
 //    compile 'com.android.support:percent:27.1.1'
 //    compile 'com.ashokvarma.android:bottom-navigation-bar:1.4.1'
 
-    api "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    api "org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.3.0"
 
     //retrofit封装okhttp
     api 'com.squareup.retrofit2:retrofit:2.3.0'
