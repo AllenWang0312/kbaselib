@@ -24,12 +24,13 @@ open class BaseFragment : Fragment(), BaseContextView {
     override fun getContext(): Context {
         return activity!!
     }
+
     override fun showToast(msg: String) {
-        T.show(activity!!, msg)
+        T.show(activity, msg)
     }
 
     @SuppressLint("WrongConstant")
-    override fun showToast( msg: String,resId: Int) {
+    override fun showToast(msg: String, resId: Int) {
         val inflater = LayoutInflater.from(activity)
         val view = inflater.inflate(R.layout.toast_view, null)
         val imageView = view.findViewById<ImageView>(R.id.toast_image)

@@ -24,27 +24,30 @@ open class T {
             t.setGravity(Gravity.CENTER, 0, 0)
             t.show()
         }
-        fun show(context: Context, str: CharSequence) {
-            val t = Toast.makeText(context, str, duration)
-            t.setGravity(Gravity.CENTER, 0, 0)
-            t.show()
+        fun show(context: Context?, str: CharSequence) {
+            if(null!=context){
+                val t = Toast.makeText(context, str, duration)
+                t.setGravity(Gravity.CENTER, 0, 0)
+                t.show()
+            }
         }
 
-        fun showToast(context: Context, msg: String, resId: Int) {
-            val inflater = LayoutInflater.from(context)
-            val view = inflater.inflate(R.layout.toast_view, null)
-            val imageView = view.findViewById<ImageView>(R.id.toast_image)
-            imageView.setBackgroundResource(resId)
-            val t = view.findViewById<TextView>(R.id.toast_text)
-            t.text = msg
+        fun showToast(context: Context?, msg: String, resId: Int) {
+            if(null!=context){
+                val inflater = LayoutInflater.from(context)
+                val view = inflater.inflate(R.layout.toast_view, null)
+                val imageView = view.findViewById<ImageView>(R.id.toast_image)
+                imageView.setBackgroundResource(resId)
+                val t = view.findViewById<TextView>(R.id.toast_text)
+                t.text = msg
 
-            var toast = Toast(context)
-            toast.setGravity(Gravity.CENTER, 0, 0);
-            toast.duration = Toast.LENGTH_SHORT
-            toast.view = view
-            toast.show()
+                var toast = Toast(context)
+                toast.setGravity(Gravity.CENTER, 0, 0);
+                toast.duration = Toast.LENGTH_SHORT
+                toast.view = view
+                toast.show()
+            }
         }
-
     }
 
     val DeBug = true
