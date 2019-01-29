@@ -20,7 +20,7 @@ import edu.tjrac.swant.kotlin.baselib.util.T
  * Created by wpc on 2018-08-02.
  */
 
-abstract class BaseActivity : AppCompatActivity(), BaseContextView {
+ abstract class BaseActivity : AppCompatActivity(), BaseContextView {
 
     override fun getContext(): Context {
         return mContext
