@@ -1,4 +1,4 @@
-package edu.tjrac.swant.kotlin.baselib.common
+package edu.tjrac.swant.baselib.common
 
 import android.annotation.SuppressLint
 import android.app.Dialog
@@ -8,19 +8,20 @@ import android.content.res.TypedArray
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.util.Log
+import android.view.LayoutInflater
 import android.view.View
 import android.widget.TextView
 import com.jaeger.library.StatusBarUtil
-import edu.tjrac.swant.kotlin.baselib.R
-import edu.tjrac.swant.kotlin.baselib.util.StringUtils
-import edu.tjrac.swant.kotlin.baselib.util.T
+import edu.tjrac.swant.baselib.R
+import edu.tjrac.swant.baselib.util.StringUtils
+import edu.tjrac.swant.baselib.util.T
 
 
 /**
  * Created by wpc on 2018-08-02.
  */
 
-abstract class BaseActivity : AppCompatActivity(), BaseContextView {
+open abstract class BaseActivity : AppCompatActivity(), BaseContextView {
 
     override fun getContext(): Context {
         return mContext
@@ -45,12 +46,13 @@ abstract class BaseActivity : AppCompatActivity(), BaseContextView {
     }
 
     protected fun setOrientation() {
-        if(isTranslucentOrFloating()){//android 8.0 透明activity 不能设置方向
+        if (isTranslucentOrFloating()) {//android 8.0 透明activity 不能设置方向
             requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED          //跟随父activity
-        }else{
+        } else {
             requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT          //竖屏
         }
     }
+
     private fun isTranslucentOrFloating(): Boolean {
         var isTranslucentOrFloating = false
         try {
@@ -66,9 +68,11 @@ abstract class BaseActivity : AppCompatActivity(), BaseContextView {
 
         return isTranslucentOrFloating
     }
+
     open fun initStatusBar() {
 //        UiUtil.setStatusTextColor(true, this)
         StatusBarUtil.setLightMode(this)
+//        window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LAYOUT_STABLE or View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
     }
 
     override fun setTitle(title: CharSequence?) {
@@ -76,12 +80,17 @@ abstract class BaseActivity : AppCompatActivity(), BaseContextView {
     }
 
     override fun showToast(msg: String) {
-        T.show(mContext, msg)
+        if (null != mContext) {
+            T.show(mContext, msg)
+        }
+
     }
 
     @SuppressLint("WrongConstant")
     override fun showToast(msg: String, resId: Int) {
-        T.showToast(mContext, msg, resId)
+        if(null!=mContext){
+            T.showToast(mContext, msg, resId)
+        }
     }
 
     override fun showInfoDialog() {
@@ -102,20 +111,22 @@ abstract class BaseActivity : AppCompatActivity(), BaseContextView {
     }
 
     override fun showProgressDialog(text: String) {
-        if (progress == null) {
-            var view = layoutInflater.inflate(R.layout.progress, null)
-            progress = Dialog(mContext, R.style.default_dialog_style)
-            progress!!.setContentView(view)
+        if(null!=mContext){
+            if (progress == null) {
+                var view = LayoutInflater.from(mContext).inflate(R.layout.progress, null)
+                progress = Dialog(mContext, R.style.default_dialog_style)
+                progress!!.setContentView(view)
 //            progress = ProgressDialog(mContext)
+            }
+            var tv_progress = progress!!.findViewById<TextView>(R.id.tv_progress)
+            if (!StringUtils.isEmpty(text)) {
+                tv_progress.visibility = View.VISIBLE
+                tv_progress.setText(text)
+            } else {
+                tv_progress.visibility = View.GONE
+            }
+            progress!!.show()
         }
-        var tv_progress = progress!!.findViewById<TextView>(R.id.tv_progress)
-        if (!StringUtils.isEmpty(text)) {
-            tv_progress.visibility = View.VISIBLE
-            tv_progress.setText(text)
-        } else {
-            tv_progress.visibility = View.GONE
-        }
-        progress!!.show()
     }
 
     override fun onDestroy() {

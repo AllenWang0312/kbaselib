@@ -1,4 +1,4 @@
-package edu.tjrac.swant.kotlin.baselib.util
+package edu.tjrac.swant.baselib.util
 
 import android.annotation.SuppressLint
 import android.app.Activity
@@ -6,10 +6,11 @@ import android.content.Context
 import android.graphics.Color
 import android.os.Build
 import android.os.Environment
+import android.util.Log
 import android.util.TypedValue
 import android.view.View
 import android.view.WindowManager
-import edu.tjrac.swant.kotlin.baselib.R
+import edu.tjrac.swant.baselib.R
 import java.io.File
 import java.io.FileInputStream
 import java.io.IOException
@@ -28,6 +29,37 @@ object UiUtil {
     fun sp2px(context: Context, sp: Int): Float {
         return TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP, sp.toFloat(),
                 context.resources.displayMetrics)
+    }
+
+    fun getNavigationHeight(context: Context): Int {
+        if (isHaveNavigationBar(context)) {
+            return context.resources.getIdentifier("navigation_bar_height", "dimen", "android");
+        } else {
+            return 0
+        }
+    }
+
+    fun isHaveNavigationBar(context: Context): Boolean {
+
+        var isHave = false
+        val rs = context.resources
+        val id = rs.getIdentifier("config_showNavigationBar", "bool", "android")
+        if (id > 0) {
+            isHave = rs.getBoolean(id)
+        }
+        try {
+            val systemPropertiesClass = Class.forName("android.os.SystemProperties")
+            val m = systemPropertiesClass.getMethod("get", String::class.java)
+            val navBarOverride = m.invoke(systemPropertiesClass, "qemu.hw.mainkeys") as String
+            if ("1" == navBarOverride) {
+                isHave = false
+            } else if ("0" == navBarOverride) {
+                isHave = true
+            }
+        } catch (e: Exception) {
+            Log.w("TAG", e)
+        }
+        return isHave
     }
 
     @JvmStatic
@@ -98,7 +130,7 @@ object UiUtil {
 //            processFlyMe(useDart, activity)
         } else if (isMIUI) {
             processMIUI(useDart, activity)
-        }else{
+        } else {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                 if (useDart) {
                     activity.window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN or View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
@@ -204,6 +236,7 @@ object UiUtil {
         fun getProperty(name: String, defaultValue: String?): String? {
             return properties.getProperty(name, defaultValue)
         }
+
         companion object {
 
             @Throws(IOException::class)

@@ -1,4 +1,4 @@
-package edu.tjrac.swant.kotlin.baselib.util;
+package edu.tjrac.swant.baselib.util;
 
 import android.content.Context;
 import android.os.Environment;
@@ -36,10 +36,12 @@ public class DataCleaner {
     private static boolean deleteDir(File dir) {
         if (dir != null && dir.isDirectory()) {
             String[] children = dir.list();
-            for (int i = 0; i < children.length; i++) {
-                boolean success = deleteDir(new File(dir, children[i]));
-                if (!success) {
-                    return false;
+            if(children.length>0){
+                for (int i = 0; i < children.length; i++) {
+                    boolean success = deleteDir(new File(dir, children[i]));
+                    if (!success) {
+                        return false;
+                    }
                 }
             }
         }

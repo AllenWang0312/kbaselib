@@ -1,4 +1,4 @@
-package edu.tjrac.swant.kotlin.baselib.util;
+package edu.tjrac.swant.baselib.util;
 
 import android.text.TextUtils;
 import android.util.Log;

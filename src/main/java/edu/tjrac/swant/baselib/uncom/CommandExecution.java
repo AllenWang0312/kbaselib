@@ -1,4 +1,4 @@
-package edu.tjrac.swant.kotlin.baselib.uncom;
+package edu.tjrac.swant.baselib.uncom;
 
 import android.util.Log;
 

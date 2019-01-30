@@ -26,7 +26,9 @@ open class BaseFragment : Fragment(), BaseContextView {
     }
 
     override fun showToast(msg: String) {
-        T.show(activity, msg)
+        if(null!=activity){
+            T.show(activity, msg)
+        }
     }
 
     @SuppressLint("WrongConstant")
@@ -59,18 +61,20 @@ open class BaseFragment : Fragment(), BaseContextView {
     }
 
     override fun showProgressDialog(text: String) {
-        if (progress == null) {
-            var view = layoutInflater.inflate(R.layout.progress, null)
-            progress = Dialog(activity, R.style.default_dialog_style)
-            progress!!.setContentView(view)
+        if(null!=activity){
+            if (progress == null) {
+                var view = LayoutInflater.from(activity).inflate(R.layout.progress, null)
+                progress = Dialog(activity, R.style.default_dialog_style)
+                progress!!.setContentView(view)
 //            progress = ProgressDialog(mContext)
+            }
+            if (!StringUtils.isEmpty(text)) {
+                progress!!.findViewById<TextView>(R.id.tv_progress).setText(text)
+            } else {
+                progress!!.findViewById<TextView>(R.id.tv_progress).setText("")
+            }
+            progress!!.show()
         }
-        if (!StringUtils.isEmpty(text)) {
-            progress!!.findViewById<TextView>(R.id.tv_progress).setText(text)
-        } else {
-            progress!!.findViewById<TextView>(R.id.tv_progress).setText("")
-        }
-        progress!!.show()
     }
 
     override fun dismissProgressDialog() {
