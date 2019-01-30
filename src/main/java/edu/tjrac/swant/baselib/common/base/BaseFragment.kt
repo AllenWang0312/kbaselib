@@ -1,4 +1,4 @@
-package edu.tjrac.swant.baselib.common
+package edu.tjrac.swant.baselib.common.base
 
 import android.annotation.SuppressLint
 import android.app.Dialog

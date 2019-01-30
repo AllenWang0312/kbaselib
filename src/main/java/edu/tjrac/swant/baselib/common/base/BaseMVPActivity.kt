@@ -1,4 +1,4 @@
-package edu.tjrac.swant.baselib.common
+package edu.tjrac.swant.baselib.common.base
 
 /**
  * Created by wpc on 2018-08-31.

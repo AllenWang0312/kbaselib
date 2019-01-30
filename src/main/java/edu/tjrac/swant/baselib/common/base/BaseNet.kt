@@ -1,4 +1,4 @@
-package edu.tjrac.swant.baselib.common
+package edu.tjrac.swant.baselib.common.base
 
 import okhttp3.Cache
 import okhttp3.OkHttpClient
@@ -39,7 +39,7 @@ open class BaseNet{
     open fun getOkHttpClient(): OkHttpClient {
         if (null === sOkHttpClient) {
             synchronized(BaseNet::class.java) {
-                var cache = Cache(File(BaseApplication.Companion.instance!!.cacheDir, "HttpCache")
+                var cache = Cache(File(BaseApplication.instance!!.cacheDir, "HttpCache")
                         , 1024 * 1024 * 100)
                 if (null === sOkHttpClient) {
                     sOkHttpClient = OkHttpClient.Builder()

@@ -7,7 +7,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import edu.tjrac.swant.baselib.R
-import edu.tjrac.swant.baselib.common.BaseApplication
+import edu.tjrac.swant.baselib.common.base.BaseApplication
 
 //import es.dmoral.toasty.Toasty;
 
