@@ -14,12 +14,11 @@ import android.webkit.WebView
 import android.webkit.WebViewClient
 import android.widget.ProgressBar
 import edu.tjrac.swant.kotlin.baselib.R
-import edu.tjrac.swant.kotlin.baselib.util.UiUtil
 
 
 open class BaseWebViewActivity : BaseBarActivity() {
 
-     var titleStr: String?=null
+    var titleStr: String? = null
     private var url: String? = null
     internal var content: String? = null
 
@@ -29,8 +28,8 @@ open class BaseWebViewActivity : BaseBarActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        UiUtil.setStatusBar(this@BaseWebViewActivity, false, false)
-        url = intent.getStringExtra("url")+"?time="+System.currentTimeMillis()
+//        UiUtil.setStatusBar(this@BaseWebViewActivity, false, false)
+        url = intent.getStringExtra("url") + "?time=" + System.currentTimeMillis()
         titleStr = intent.getStringExtra("title")
         content = intent.getStringExtra("content")
 
@@ -53,11 +52,10 @@ open class BaseWebViewActivity : BaseBarActivity() {
     override fun setToolbar(view: View) {
         super.setToolbar(view)
         enableBackIcon()
-        if(null!=titleStr){
+        if (null != titleStr) {
             setTitle(titleStr)
         }
-        setLeftIcon2(R.drawable.close, View.OnClickListener {
-            v ->
+        setLeftIcon2(R.drawable.close, View.OnClickListener { v ->
             finish()
         })
     }
@@ -101,7 +99,7 @@ open class BaseWebViewActivity : BaseBarActivity() {
                 super.onProgressChanged(view, newProgress)
                 if (newProgress == 100) {
                     progressBar.visibility = View.GONE
-                    if(null==titleStr){
+                    if (null == titleStr) {
                         setTitle(webView.title)
                     }
                 } else {
