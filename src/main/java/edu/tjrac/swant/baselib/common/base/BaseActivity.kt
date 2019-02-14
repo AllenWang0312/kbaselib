@@ -5,6 +5,8 @@ import android.app.Dialog
 import android.content.Context
 import android.content.pm.ActivityInfo
 import android.content.res.TypedArray
+import android.os.Build
+import android.os.Build.VERSION_CODES.O
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.util.Log
@@ -12,6 +14,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.widget.TextView
 import com.jaeger.library.StatusBarUtil
+import edu.tjrac.swant.baselib.BuildConfig
 import edu.tjrac.swant.baselib.R
 import edu.tjrac.swant.baselib.util.StringUtils
 import edu.tjrac.swant.baselib.util.T
@@ -46,6 +49,9 @@ open abstract class BaseActivity : AppCompatActivity(), BaseContextView {
     }
 
     protected fun setOrientation() {
+        if(Build.VERSION.SDK_INT == Build.VERSION_CODES.O){
+            return
+        }
         if (isTranslucentOrFloating()) {//android 8.0 透明activity 不能设置方向
             requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED          //跟随父activity
         } else {
@@ -137,26 +143,32 @@ open abstract class BaseActivity : AppCompatActivity(), BaseContextView {
 
     override fun onResume() {
         super.onResume()
-        try {
-            val aClass = Class.forName("com.umeng.analytics.MobclickAgent")
-            var getter = aClass.getDeclaredMethod("onResume", Context::class.java)
-            getter.invoke(aClass.newInstance(), this)
-        } catch (e: ClassNotFoundException) {
-            e.printStackTrace()
+        if(!BuildConfig.DEBUG){
+            try {
+                val aClass = Class.forName("com.umeng.analytics.MobclickAgent")
+                var getter = aClass.getDeclaredMethod("onResume", Context::class.java)
+                getter.invoke(aClass.newInstance(), this)
+            } catch (e: ClassNotFoundException) {
+                e.printStackTrace()
+            }
         }
+
 
         Log.e(this.javaClass.simpleName, "onResume")
     }
 
     override fun onPause() {
         super.onPause()
-        try {
-            val aClass = Class.forName("com.umeng.analytics.MobclickAgent")
-            var getter = aClass.getDeclaredMethod("onPause", Context::class.java)
-            getter.invoke(aClass.newInstance(), this)
-        } catch (e: ClassNotFoundException) {
-            e.printStackTrace()
+        if(!BuildConfig.DEBUG){
+            try {
+                val aClass = Class.forName("com.umeng.analytics.MobclickAgent")
+                var getter = aClass.getDeclaredMethod("onPause", Context::class.java)
+                getter.invoke(aClass.newInstance(), this)
+            } catch (e: ClassNotFoundException) {
+                e.printStackTrace()
+            }
         }
+
         Log.e(this.javaClass.simpleName, "onPause")
     }
 
