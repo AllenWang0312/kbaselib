@@ -1,8 +1,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          package="edu.tjrac.swant.kotlin.baselib">
+          package="edu.tjrac.swant.baselib">
     <!--android:label="@string/app_name"-->
     <application
         >
-        <activity android:name=".common.BaseWebViewActivity"></activity>
+        <activity android:name=".common.base.BaseWebViewActivity"></activity>
     </application>
 </manifest>

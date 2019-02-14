@@ -49,7 +49,7 @@ dependencies {
 //    compile 'com.android.support:percent:27.1.1'
 //    compile 'com.ashokvarma.android:bottom-navigation-bar:1.4.1'
 
-    api "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
+    api "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 
     //retrofit封装okhttp
     api 'com.squareup.retrofit2:retrofit:2.3.0'
