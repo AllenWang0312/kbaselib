@@ -37,8 +37,8 @@ class FragmentsPagerAdapter(fm: FragmentManager) : FragmentStatePagerAdapter(fm)
         return mFragments[i]
     }
 
-    fun setUpWithRadioGroup(vp: ViewPager, group: RadioGroup) {
-        group.setOnCheckedChangeListener { group, checkedId ->
+    fun setUpWithRadioGroup(vp: ViewPager, g: RadioGroup) {
+        g.setOnCheckedChangeListener { group, checkedId ->
             for (i in 0 until count) {
                 if (checkedId == group.getChildAt(i).id) {
                     vp.currentItem = i
