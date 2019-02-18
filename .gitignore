@@ -13,4 +13,5 @@
 *.md
 /captures
 .externalNativeBuild
+/src/main/res/values/lms_ui_config.xml
 
