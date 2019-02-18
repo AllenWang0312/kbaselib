@@ -3,6 +3,8 @@ package edu.tjrac.swant.baselib.common.adapter
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentStatePagerAdapter
+import android.support.v4.view.ViewPager
+import android.widget.RadioGroup
 import java.util.*
 
 /**
@@ -35,5 +37,14 @@ class FragmentsPagerAdapter(fm: FragmentManager) : FragmentStatePagerAdapter(fm)
         return mFragments[i]
     }
 
+    fun setUpWithRadioGroup(vp: ViewPager, g: RadioGroup) {
+        g.setOnCheckedChangeListener { group, checkedId ->
+            for (i in 0 until count) {
+                if (checkedId == group.getChildAt(i).id) {
+                    vp.currentItem = i
+                }
+            }
+        }
+    }
 
 }

@@ -144,7 +144,7 @@ open abstract class BaseActivity : AppCompatActivity(), BaseContextView {
     override fun onResume() {
         super.onResume()
         if(!BuildConfig.DEBUG){
-            try {
+            try { 
                 val aClass = Class.forName("com.umeng.analytics.MobclickAgent")
                 var getter = aClass.getDeclaredMethod("onResume", Context::class.java)
                 getter.invoke(aClass.newInstance(), this)
