@@ -7,6 +7,7 @@ import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import android.support.v4.app.FragmentActivity
+import android.util.Log
 import android.view.View
 import android.webkit.WebChromeClient
 import android.webkit.WebSettings
@@ -19,7 +20,7 @@ import edu.tjrac.swant.baselib.util.UiUtil
 
 open class BaseWebViewActivity : BaseBarActivity() {
 
-     var titleStr: String?=null
+    var titleStr: String? = null
     private var url: String? = null
     internal var content: String? = null
 
@@ -30,12 +31,12 @@ open class BaseWebViewActivity : BaseBarActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         UiUtil.setStatusBar(this@BaseWebViewActivity, false, false)
-        url = intent.getStringExtra("url")+"?time="+System.currentTimeMillis()
+        url = intent.getStringExtra("url") + "?time=" + System.currentTimeMillis()
         titleStr = intent.getStringExtra("title")
         content = intent.getStringExtra("content")
 
         if (url != null || content != null) {
-//            Log.i("web href", url)
+
         } else {
             showToast("content or url is null")
             finish()
@@ -53,11 +54,10 @@ open class BaseWebViewActivity : BaseBarActivity() {
     override fun setToolbar(view: View) {
         super.setToolbar(view)
         enableBackIcon()
-        if(null!=titleStr){
+        if (null != titleStr) {
             setTitle(titleStr)
         }
-        setLeftIcon2(R.drawable.close, View.OnClickListener {
-            v ->
+        setLeftIcon2(R.drawable.close, View.OnClickListener { v ->
             finish()
         })
     }
@@ -67,24 +67,22 @@ open class BaseWebViewActivity : BaseBarActivity() {
         progressBar = findViewById<View>(R.id.progress) as ProgressBar
         val settings = webView.settings
         settings.javaScriptEnabled = true
-        //支持插件
-        //        settings.setPluginsEnabled(true);
         //设置自适应屏幕，两者合用
         settings.useWideViewPort = true //将图片调整到适合webview的大小
         settings.loadWithOverviewMode = true // 缩放至屏幕的大小
 
         //缩放操作
-        //        webSettings.setSupportZoom(true); //支持缩放，默认为true。是下面那个的前提。
-        //        webSettings.setBuiltInZoomControls(true); //设置内置的缩放控件。若为false，则该WebView不可缩放
-        //        webSettings.setDisplayZoomControls(false); //隐藏原生的缩放控件
+        settings.setSupportZoom(true); //支持缩放，默认为true。是下面那个的前提。
+        settings.setBuiltInZoomControls(true); //设置内置的缩放控件。若为false，则该WebView不可缩放
+        settings.setDisplayZoomControls(false); //隐藏原生的缩放控件
         //其他细节操作
-        //        webSettings.setAllowFileAccess(true); //设置可以访问文件
-        //        webSettings.setJavaScriptCanOpenWindowsAutomatically(true); //支持通过JS打开新窗口
+        settings.setAllowFileAccess(true); //设置可以访问文件
+        settings.setJavaScriptCanOpenWindowsAutomatically(true); //支持通过JS打开新窗口
         settings.loadsImagesAutomatically = true //支持自动加载图片
         settings.defaultTextEncodingName = "utf-8"///设置编码格式
 
-        //优先使用缓存:
-        settings.cacheMode = WebSettings.LOAD_NO_CACHE
+        settings.setAppCacheEnabled(true)
+        settings.cacheMode = WebSettings.LOAD_DEFAULT
         //缓存模式如下：
         //LOAD_CACHE_ONLY: 不使用网络，只读取本地缓存数据
         //LOAD_DEFAULT: （默认）根据cache-control决定是否从网络上取数据。
@@ -101,7 +99,7 @@ open class BaseWebViewActivity : BaseBarActivity() {
                 super.onProgressChanged(view, newProgress)
                 if (newProgress == 100) {
                     progressBar.visibility = View.GONE
-                    if(null==titleStr){
+                    if (null == titleStr) {
                         setTitle(webView.title)
                     }
                 } else {
@@ -119,6 +117,7 @@ open class BaseWebViewActivity : BaseBarActivity() {
 //          }
             override fun shouldOverrideUrlLoading(view: WebView, url: String): Boolean {
                 view.loadUrl(url)
+                Log.i("url", url)
                 return true
             }
         }
