@@ -13,5 +13,4 @@
 *.md
 /captures
 .externalNativeBuild
-/src/main/res/values/lms_ui_config.xml
-/src/main/res/values/ykt_ui_config.xml
+
