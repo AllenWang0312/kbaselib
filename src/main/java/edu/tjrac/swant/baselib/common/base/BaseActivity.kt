@@ -18,6 +18,7 @@ import edu.tjrac.swant.baselib.BuildConfig
 import edu.tjrac.swant.baselib.R
 import edu.tjrac.swant.baselib.util.StringUtils
 import edu.tjrac.swant.baselib.util.T
+import edu.tjrac.swant.baselib.util.UiUtil
 
 
 /**
@@ -78,6 +79,7 @@ open abstract class BaseActivity : AppCompatActivity(), BaseContextView {
     open fun initStatusBar() {
 //        UiUtil.setStatusTextColor(true, this)
         StatusBarUtil.setLightMode(this)
+//        UiUtil.setStatusBar(this,true,true)
 //        window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LAYOUT_STABLE or View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
     }
 

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/toolbar"
     android:layout_width="match_parent"
-    android:background="@color/colorPrimary"
+    android:background="@color/white"
     android:layout_height="@dimen/actionBarSize">
 
     <ImageView
