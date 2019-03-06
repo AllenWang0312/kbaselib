@@ -47,7 +47,7 @@ dependencies {
 
 //    implementation 'com.android.support.constraint:constraint-layout:1.0.2'
 //    compile 'com.android.support:percent:27.1.1'
-//    compile 'com.ashokvarma.android:bottom-navigation-bar:1.4.1'
+//    compile 'com.ashokvarma.android:bottom-home_menu-bar:1.4.1'
 
     api "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 
