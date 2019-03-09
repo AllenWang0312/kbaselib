@@ -1,6 +1,7 @@
 package edu.tjrac.swant.baselib.common.base
 
 import okhttp3.*
+import retrofit2.Converter
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
@@ -26,6 +27,7 @@ abstract class BaseNet {
             if (null === retrofitMap.get(url)) {
                 var retrofit = Retrofit.Builder().client(getOkHttpClient())
                         .baseUrl(url)
+//                        .addConverterFactory(GsonResponseConverterFactory.create())
                         .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
                         .addConverterFactory(GsonConverterFactory.create())
                         .build();
@@ -47,6 +49,7 @@ abstract class BaseNet {
                             .cache(cache)
                             .readTimeout(60, TimeUnit.SECONDS)
                             .addInterceptor(getInterceptor())
+
                             .build()
                 }
             }
@@ -58,4 +61,5 @@ abstract class BaseNet {
      * 设置公共参数
      */
     abstract fun getInterceptor(): Interceptor
+
 }
