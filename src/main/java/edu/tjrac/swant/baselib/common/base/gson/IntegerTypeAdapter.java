@@ -36,19 +36,21 @@ public class IntegerTypeAdapter extends TypeAdapter {
                 in.nextNull();
                 Log.e("TypeAdapter", "null is not a number");
                 return 0;
-            }
-            if (in.peek() == JsonToken.BOOLEAN) {
+            }else if (in.peek() == JsonToken.BOOLEAN) {
                 boolean b = in.nextBoolean();
                 Log.e("TypeAdapter", b + " is not a number");
                 return 0;
-            }
-            if (in.peek() == JsonToken.STRING) {
+            }else if (in.peek() == JsonToken.STRING) {
                 String str = in.nextString();
-                if (StringUtils.Companion.isInteger(str)){
-                    return Integer.parseInt(str);
-                } else {
-                    Log.e("TypeAdapter", str + " is not a int number");
+                if(StringUtils.Companion.isEmpty(str)){
                     return 0;
+                }else {
+                    if (StringUtils.Companion.isInteger(str)){
+                        return Integer.parseInt(str);
+                    } else {
+                        Log.e("TypeAdapter", str + " is not a int number");
+                        return 0;
+                    }
                 }
             } else {
                 value = in.nextInt();

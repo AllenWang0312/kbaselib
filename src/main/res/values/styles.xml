@@ -12,10 +12,18 @@
 
         <item name="android:windowActionModeOverlay">true</item>
         <item name="android:windowContentOverlay">@null</item>
+
         <item name="android:actionModeBackground">@color/colorPrimary</item>
-        <item name="android:windowTranslucentNavigation">false</item>
-        <item name="android:windowTranslucentStatus">false</item>
+
+
     </style>
+    <style name="AppTheme.TranslucentStatus">
+        <!--<item name="android:windowTranslucentNavigation">false</item>-->
+        <!--<item name="android:naviga">false</item>-->
+        <item name="android:windowTranslucentStatus">true</item>
+    </style>
+    <!--<item name="android:windowTranslucentNavigation">false</item>-->
+    <!--<item name="android:windowTranslucentStatus">false</item>-->
     <!--<style name="AppTheme.TranslucentStatus">-->
     <!--<item name="android:windowTranslucentNavigation">false</item>-->
     <!--<item name="android:windowTranslucentStatus">true</item>-->

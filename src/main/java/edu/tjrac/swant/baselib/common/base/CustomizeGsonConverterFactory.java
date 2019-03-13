@@ -31,7 +31,9 @@ public class CustomizeGsonConverterFactory extends Converter.Factory {
         return new GsonBuilder()
                 .registerTypeAdapter(int.class, new IntegerTypeAdapter())
                 .registerTypeAdapter(Integer.class, new IntegerTypeAdapter())
+
                 .registerTypeAdapter(String.class, new StringTypeAdapter())
+
                 .registerTypeAdapter(float.class, new FloatTypeAdapter())
                 .registerTypeAdapter(Float.class, new FloatTypeAdapter())
                 .create();

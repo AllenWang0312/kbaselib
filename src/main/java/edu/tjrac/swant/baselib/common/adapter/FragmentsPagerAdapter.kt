@@ -41,7 +41,7 @@ class FragmentsPagerAdapter(fm: FragmentManager) : FragmentStatePagerAdapter(fm)
         g.setOnCheckedChangeListener { group, checkedId ->
             for (i in 0 until count) {
                 if (checkedId == group.getChildAt(i).id) {
-                    vp.currentItem = i
+                    vp.setCurrentItem(i,false)
                 }
             }
         }
