@@ -54,30 +54,7 @@ dependencies {
     //    compile 'com.ashokvarma.android:bottom-home_menu-bar:1.4.1'
     api "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 
-    //retrofit封装okhttp
-    api 'com.squareup.retrofit2:retrofit:2.3.0'
 
-    //    compile 'com.squareup.retrofit2:adapter-rxjava2:2.3.0'
-    api 'com.squareup.retrofit2:adapter-rxjava:2.3.0'
-    api 'com.squareup.retrofit2:converter-gson:2.3.0'
-
-    //响应式编程
-
-    //    compile 'io.reactivex:rxjava:1.1.9'
-
-    //    compile 'io.reactivex.rxjava2:rxjava:2.1.8'
-
-    //    compile 'io.reactivex.rxjava2:rxandroid:2.0.1'
-    api 'io.reactivex:rxandroid:1.2.1'
-
-    //json解析
-    api 'com.google.code.gson:gson:2.8.2'
-
-    //image
-
-
-    //    compile 'com.github.bumptech.glide:compiler:4.5.0'
-    api 'com.squareup.okhttp3:okhttp:3.8.1'
     api 'com.squareup.okhttp3:logging-interceptor:3.8.1'
     api 'com.uber.autodispose:autodispose:0.6.1'
     api 'com.uber.autodispose:autodispose-android-archcomponents:0.6.1'
