@@ -17,7 +17,7 @@ import edu.tjrac.swant.baselib.util.StringUtils;
 
 public class IntegerTypeAdapter extends TypeAdapter {
     @Override
-    public void write(JsonWriter out, Object value) throws IOException {
+    public void write(JsonWriter out, Object value) {
         try {
             if (value == null){
                 value = 0;
