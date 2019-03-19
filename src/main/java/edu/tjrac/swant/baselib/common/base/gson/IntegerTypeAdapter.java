@@ -42,7 +42,7 @@ public class IntegerTypeAdapter extends TypeAdapter {
                 return 0;
             }else if (in.peek() == JsonToken.STRING) {
                 String str = in.nextString();
-                if(StringUtils.Companion.isEmpty(str)){
+                if(null==str||StringUtils.Companion.isEmpty(str)){
                     return 0;
                 }else {
                     if (StringUtils.Companion.isInteger(str)){

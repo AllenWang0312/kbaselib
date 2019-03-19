@@ -48,7 +48,6 @@ abstract class BaseNet {
                             .cache(cache)
                             .readTimeout(10, TimeUnit.SECONDS)
                             .addInterceptor(getInterceptor())
-
                             .build()
                 }
             }

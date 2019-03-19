@@ -50,7 +50,7 @@ open abstract class BaseActivity : AppCompatActivity(), BaseContextView {
     }
 
     protected fun setOrientation() {
-        if(Build.VERSION.SDK_INT == Build.VERSION_CODES.O){
+        if (Build.VERSION.SDK_INT == Build.VERSION_CODES.O) {
             return
         }
         if (isTranslucentOrFloating()) {//android 8.0 透明activity 不能设置方向
@@ -77,6 +77,7 @@ open abstract class BaseActivity : AppCompatActivity(), BaseContextView {
     }
 
     open fun initStatusBar() {
+        StatusBarUtil.setTransparent(this)
         StatusBarUtil.setLightMode(this)
     }
 
@@ -93,7 +94,7 @@ open abstract class BaseActivity : AppCompatActivity(), BaseContextView {
 
     @SuppressLint("WrongConstant")
     override fun showToast(msg: String, resId: Int) {
-        if(null!=mContext){
+        if (null != mContext) {
             T.showToast(mContext, msg, resId)
         }
     }
@@ -116,7 +117,7 @@ open abstract class BaseActivity : AppCompatActivity(), BaseContextView {
     }
 
     override fun showProgressDialog(text: String) {
-        if(null!=mContext){
+        if (null != mContext) {
             if (progress == null) {
                 var view = LayoutInflater.from(mContext).inflate(R.layout.progress, null)
                 progress = Dialog(mContext, R.style.default_dialog_style)
@@ -142,8 +143,8 @@ open abstract class BaseActivity : AppCompatActivity(), BaseContextView {
 
     override fun onResume() {
         super.onResume()
-        if(!BuildConfig.DEBUG){
-            try { 
+        if (!BuildConfig.DEBUG) {
+            try {
                 val aClass = Class.forName("com.umeng.analytics.MobclickAgent")
                 var getter = aClass.getDeclaredMethod("onResume", Context::class.java)
                 getter.invoke(aClass.newInstance(), this)
@@ -158,7 +159,7 @@ open abstract class BaseActivity : AppCompatActivity(), BaseContextView {
 
     override fun onPause() {
         super.onPause()
-        if(!BuildConfig.DEBUG){
+        if (!BuildConfig.DEBUG) {
             try {
                 val aClass = Class.forName("com.umeng.analytics.MobclickAgent")
                 var getter = aClass.getDeclaredMethod("onPause", Context::class.java)
