@@ -3,11 +3,14 @@ package edu.tjrac.swant.baselib.util;
 import android.content.Context;
 import android.os.Environment;
 
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 
@@ -84,30 +87,33 @@ public class FileUtils {
     }
 
 
-//    public static boolean writeByteArrayToFile(byte[] bytes, String dirPath, String filename) {
-//        createOrExistsDir(dirPath);
-//        createFileIfNotExist(dirPath, filename);
-//
-//        FileOutputStream fos = null;
-//        try {
-//            fos = new FileOutputStream(new File(dirPath, filename));
-//            fos.write(bytes);
-//        } catch (FileNotFoundException e) {
-//            e.printStackTrace();
-//            return false;
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//            return false;
-//        } finally {
-//            try {
-//                fos.close();
-//                return true;
-//            } catch (IOException e) {
-//                e.printStackTrace();
-//                return false;
-//            }
-//        }
-//    }
+    public static boolean writeByteArrayToFile(byte[] bytes, String dirPath, String filename) {
+        createOrExistsDir(dirPath);
+        File file = createFileIfNotExist(dirPath, filename);
+       return writeByteArrayToFile(bytes, file);
+    }
+
+    public static boolean writeByteArrayToFile(byte[] bytes, File file) {
+        FileOutputStream fos = null;
+        try {
+            fos = new FileOutputStream(file);
+            fos.write(bytes);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+            return false;
+        } catch (IOException e) {
+            e.printStackTrace();
+            return false;
+        } finally {
+            try {
+                fos.close();
+                return true;
+            } catch (IOException e) {
+                e.printStackTrace();
+                return false;
+            }
+        }
+    }
 
 //
 //    @TargetApi(Build.VERSION_CODES.GINGERBREAD)
@@ -140,7 +146,7 @@ public class FileUtils {
         return file != null && (file.exists() ? file.isDirectory() : file.mkdirs());
     }
 
-    private static void createFileIfNotExist(String dirPath, String filename) {
+    private static File createFileIfNotExist(String dirPath, String filename) {
         File file = new File(dirPath, filename);
         if (!file.exists()) {
             try {
@@ -149,6 +155,7 @@ public class FileUtils {
                 e.printStackTrace();
             }
         }
+        return file;
     }
 
     public static void deleteFiles(String path, ArrayList<Integer> select) {
@@ -159,8 +166,9 @@ public class FileUtils {
 
         }
     }
+
     public static void deleteFile(String path) {
-        File file=new File(path);
+        File file = new File(path);
         if (file.exists()) {//判断文件是否存在
             if (file.isFile()) {//判断是否是文件
                 file.delete();//删除文件
@@ -174,6 +182,7 @@ public class FileUtils {
         } else {
         }
     }
+
     public static void deleteFile(File file) {
         if (file.exists()) {//判断文件是否存在
             if (file.isFile()) {//判断是否是文件
@@ -188,6 +197,7 @@ public class FileUtils {
         } else {
         }
     }
+
     public static void deleteFiles(File root) {
         File files[] = root.listFiles();
         if (files != null) {
@@ -202,6 +212,7 @@ public class FileUtils {
             }
         }
     }
+
     public static String getAbsPath(ArrayList<String> rote) {
         StringBuffer path = new StringBuffer();
         for (String str : rote) {
@@ -225,7 +236,7 @@ public class FileUtils {
         if (dotIndex < 0) {
             return type;
         }
-    /* 获取文件的后缀名*/
+        /* 获取文件的后缀名*/
         String end = extensionName(fName);
         if (end == "") return type;
         //在MIME和文件类型的匹配表中找到对应的MIME类型。
@@ -427,7 +438,7 @@ public class FileUtils {
     public static final int SIZETYPE_MB = 3;//获取文件大小单位为MB的double值
     public static final int SIZETYPE_GB = 4;//获取文件大小单位为GB的double值
 
-    public static float getAvailInfo( int sizeType) {
+    public static float getAvailInfo(int sizeType) {
         File sdcard_filedir = Environment.getExternalStorageDirectory();//得到sdcard的目录作为一个文件对象
         long usableSpace = sdcard_filedir.getUsableSpace();//获取文件目录对象剩余空间
 //        long totalSpace = sdcard_filedir.getTotalSpace();
@@ -436,13 +447,13 @@ public class FileUtils {
 //        ActivityManager.MemoryInfo outInfo = new ActivityManager.MemoryInfo();
 //        am.getMemoryInfo(outInfo);
         if (sizeType == 1) {
-            return usableSpace ;
+            return usableSpace;
         } else if (sizeType == 2) {
-            return usableSpace / 1024 ;
+            return usableSpace / 1024;
         } else if (sizeType == 3) {
             return usableSpace / 1024f / 1024f;
         } else {
-            return usableSpace / 1024f / 1024f / 1024f ;
+            return usableSpace / 1024f / 1024f / 1024f;
         }
     }
 
@@ -583,5 +594,58 @@ public class FileUtils {
                 break;
         }
         return fileSizeLong;
+    }
+
+    /**
+     * 将文本文件中的内容读入到buffer中
+     *
+     * @param buffer   buffer
+     * @param filePath 文件路径
+     * @throws IOException 异常
+     * @author cn.outofmemory
+     * @date 2013-1-7
+     */
+    public static void readToBuffer(StringBuffer buffer, String filePath) throws IOException {
+        FileInputStream is = new FileInputStream(filePath);
+        readToBuffer(buffer, is);
+    }
+
+    public static void readToBuffer(StringBuffer buffer, File file) throws IOException {
+        FileInputStream is = new FileInputStream(file);
+        readToBuffer(buffer, is);
+    }
+
+    public static void readToBuffer(StringBuffer buffer, FileInputStream is) throws IOException {
+        String line; // 用来保存每行读取的内容
+        BufferedReader reader = new BufferedReader(new InputStreamReader(is));
+        line = reader.readLine(); // 读取第一行
+        while (line != null) { // 如果 line 为空说明读完了
+            buffer.append(line); // 将读到的内容添加到 buffer 中
+            buffer.append("\n"); // 添加换行符
+            line = reader.readLine(); // 读取下一行
+        }
+        reader.close();
+        is.close();
+    }
+
+    /**
+     * 读取文本文件内容
+     *
+     * @param filePath 文件所在路径
+     * @return 文本内容
+     * @throws IOException 异常
+     * @author cn.outofmemory
+     * @date 2013-1-7
+     */
+    public static String readFile(String filePath) throws IOException {
+        StringBuffer sb = new StringBuffer();
+        FileUtils.readToBuffer(sb, filePath);
+        return sb.toString();
+    }
+
+    public static String readFile(File file) throws IOException {
+        StringBuffer sb = new StringBuffer();
+        FileUtils.readToBuffer(sb, file);
+        return sb.toString();
     }
 }
