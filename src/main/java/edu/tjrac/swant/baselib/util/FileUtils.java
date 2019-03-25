@@ -1,7 +1,13 @@
 package edu.tjrac.swant.baselib.util;
 
 import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
+import android.os.Build;
 import android.os.Environment;
+import android.support.v4.content.FileProvider;
+
+import org.jetbrains.annotations.NotNull;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -90,7 +96,7 @@ public class FileUtils {
     public static boolean writeByteArrayToFile(byte[] bytes, String dirPath, String filename) {
         createOrExistsDir(dirPath);
         File file = createFileIfNotExist(dirPath, filename);
-       return writeByteArrayToFile(bytes, file);
+        return writeByteArrayToFile(bytes, file);
     }
 
     public static boolean writeByteArrayToFile(byte[] bytes, File file) {
@@ -647,5 +653,24 @@ public class FileUtils {
         StringBuffer sb = new StringBuffer();
         FileUtils.readToBuffer(sb, file);
         return sb.toString();
+    }
+
+    public static void openFile(Context context, @NotNull File file) {
+        Intent intent = new Intent();
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        //设置intent的Action属性
+        intent.setAction(Intent.ACTION_VIEW);
+        //获取文件file的MIME类型
+        String type = getMIMEType(file);
+        //设置intent的data和Type属性。
+        Uri uri = null;
+        if (Build.VERSION.SDK_INT >= 24) {
+            uri = FileProvider.getUriForFile(context.getApplicationContext(), "lms2.xz.act.provider", file);
+        } else {
+            uri = Uri.fromFile(file);
+        }
+        intent.setDataAndType(uri, type);
+        //跳转
+        context.startActivity(intent);
     }
 }

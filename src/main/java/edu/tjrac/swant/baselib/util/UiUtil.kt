@@ -3,6 +3,8 @@ package edu.tjrac.swant.baselib.util
 import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Context
+import android.graphics.Bitmap
+import android.graphics.Canvas
 import android.graphics.Color
 import android.os.Build
 import android.os.Environment
@@ -13,6 +15,7 @@ import android.view.WindowManager
 import edu.tjrac.swant.baselib.R
 import java.io.File
 import java.io.FileInputStream
+import java.io.FileOutputStream
 import java.io.IOException
 import java.util.*
 
@@ -21,6 +24,42 @@ import java.util.*
  */
 
 object UiUtil {
+    fun saveViewToImage(view: View, path: String): Boolean {
+        view.isDrawingCacheEnabled = true
+        view.drawingCacheQuality = View.DRAWING_CACHE_QUALITY_HIGH
+        view.drawingCacheBackgroundColor = Color.WHITE
+        var cache = loadBitmapFromView(view)
+        return saveBitmapToFile(cache, path)
+    }
+
+    private fun saveBitmapToFile(cache: Bitmap, path: String): Boolean {
+        var fos: FileOutputStream? = null
+        try {
+            var file = File(path)
+            if (!file.exists()) {
+                file.createNewFile()
+            }
+            fos = FileOutputStream(file)
+            cache.compress(Bitmap.CompressFormat.PNG, 90, fos)
+            fos.flush()
+            fos.close()
+            return true
+        } catch (e: java.lang.Exception) {
+            return false
+        }
+    }
+
+    private fun loadBitmapFromView(v: View): Bitmap {
+        var w = v.width
+        var h = v.height
+        var bmp = Bitmap.createBitmap(w, h, Bitmap.Config.ARGB_8888)
+        var c = Canvas(bmp)
+        c.drawColor(Color.WHITE)
+        v.layout(0, 0, w, h)
+        v.draw(c)
+        return bmp
+    }
+
     fun dp2px(context: Context, dp: Int): Float {
         return TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp.toFloat(),
                 context.resources.displayMetrics)
