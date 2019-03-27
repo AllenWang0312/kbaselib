@@ -10,8 +10,11 @@ import android.os.Build
 import android.os.Environment
 import android.util.Log
 import android.util.TypedValue
+import android.view.LayoutInflater
 import android.view.View
 import android.view.WindowManager
+import android.widget.ImageView
+import android.widget.TextView
 import edu.tjrac.swant.baselib.R
 import java.io.File
 import java.io.FileInputStream
@@ -58,6 +61,15 @@ object UiUtil {
         v.layout(0, 0, w, h)
         v.draw(c)
         return bmp
+    }
+
+    fun createEmpty(context: Context, resId: Int, hint: String): View {
+        var empty = LayoutInflater.from(context).inflate(R.layout.empty, null)
+        empty.findViewById<ImageView>(R.id.iv_empty).setImageResource(resId)
+        if (!StringUtils.isEmpty(hint)) {
+            empty.findViewById<TextView>(R.id.tv_empty).text = hint
+        }
+        return empty
     }
 
     fun dp2px(context: Context, dp: Int): Float {
