@@ -94,7 +94,7 @@ class StringUtils private constructor() {
             var telRegex: String
             when (type) {
                 "86"//中国大陆
-                -> telRegex = "[1][0123456789]\\d{9}"
+                -> telRegex = "[1][0356789]\\d{9}"
                 "852"//香港
                 -> telRegex = "[5689]\\d{7}"
                 "853"//澳门
@@ -333,6 +333,10 @@ class StringUtils private constructor() {
             else
                 retStr = "" + i
             return retStr
+        }
+
+        fun formatTime(time: String) :String{
+            return time.substring(0,10)?.replace("-","/")
         }
     }
 }
