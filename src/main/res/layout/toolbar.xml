@@ -73,7 +73,6 @@
         android:layout_height="36dp"
         android:visibility="gone"
         android:layout_gravity="right|center_vertical"
-        android:padding="9dp"
         android:layout_marginRight="8dp"/>
 
 </FrameLayout>

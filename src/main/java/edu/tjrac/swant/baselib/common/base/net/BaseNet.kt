@@ -46,7 +46,7 @@ abstract class BaseNet {
                 if (null === sOkHttpClient) {
                     sOkHttpClient = OkHttpClient.Builder()
                             .cache(cache)
-                            .readTimeout(20, TimeUnit.SECONDS)
+                            .readTimeout(10, TimeUnit.SECONDS)
                             .addInterceptor(getInterceptor())
                             .build()
                 }

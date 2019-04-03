@@ -93,13 +93,13 @@ class StringUtils private constructor() {
             Log.i("isMobileNo", type + "_" + mobiles)
             var telRegex: String
             when (type) {
-                "+86"//中国大陆
+                "86"//中国大陆
                 -> telRegex = "[1][0123456789]\\d{9}"
-                "+852"//香港
+                "852"//香港
                 -> telRegex = "[5689]\\d{7}"
-                "+853"//澳门
+                "853"//澳门
                 -> telRegex = "[6]\\d{7}"
-                "+886"//台湾
+                "886"//台湾
                 -> telRegex = "[0][9]\\d{8}"
                 else -> return false
             }
