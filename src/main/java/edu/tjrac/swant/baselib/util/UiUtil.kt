@@ -71,7 +71,6 @@ object UiUtil {
         }
         return empty
     }
-
     fun dp2px(context: Context, dp: Int): Float {
         return TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp.toFloat(),
                 context.resources.displayMetrics)

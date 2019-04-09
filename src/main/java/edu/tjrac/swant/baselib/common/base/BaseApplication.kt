@@ -8,7 +8,7 @@ import android.app.Application
 
 abstract class BaseApplication : Application() {
 
-    protected var activitys: ArrayList<BaseActivity>? = null
+    var activitys: ArrayList<BaseActivity>? = null
 
 
     override fun onCreate() {
