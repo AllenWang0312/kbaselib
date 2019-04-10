@@ -4,7 +4,6 @@
 *.properties
 *.bat
 .gradle
-/src/main/res
 /build
 */.idea
 

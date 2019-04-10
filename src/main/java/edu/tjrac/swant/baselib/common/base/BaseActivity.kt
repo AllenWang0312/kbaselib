@@ -89,7 +89,6 @@ open abstract class BaseActivity : AppCompatActivity(), BaseContextView {
         if (null != mContext) {
             T.show(mContext, msg)
         }
-
     }
 
     @SuppressLint("WrongConstant")
