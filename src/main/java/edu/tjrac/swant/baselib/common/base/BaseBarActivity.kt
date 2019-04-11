@@ -89,6 +89,7 @@ abstract class BaseBarActivity : BaseActivity() {
 
     fun enableBackIcon() {
         enableBackIcon(R.drawable.back)
+
     }
 
     fun enableBackIcon(red_id: Int) {
