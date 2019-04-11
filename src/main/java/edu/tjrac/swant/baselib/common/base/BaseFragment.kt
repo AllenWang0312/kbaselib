@@ -26,14 +26,12 @@ open class BaseFragment : Fragment(), BaseContextView {
     }
 
     override fun showToast(msg: String) {
-        if(null!=activity){
-            T.show(activity, msg)
-        }
+        T.show(msg)
     }
 
     @SuppressLint("WrongConstant")
     override fun showToast(msg: String, resId: Int) {
-        if(null==activity) return
+        if (null == activity) return
         val inflater = LayoutInflater.from(activity)
         val view = inflater.inflate(R.layout.toast_view, null)
         val imageView = view.findViewById<ImageView>(R.id.toast_image)
@@ -62,7 +60,7 @@ open class BaseFragment : Fragment(), BaseContextView {
     }
 
     override fun showProgressDialog(text: String) {
-        if(null!=activity){
+        if (null != activity) {
             if (progress == null) {
                 var view = LayoutInflater.from(activity).inflate(R.layout.progress, null)
                 progress = Dialog(activity, R.style.default_dialog_style)

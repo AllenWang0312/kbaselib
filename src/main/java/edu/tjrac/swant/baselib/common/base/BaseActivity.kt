@@ -86,9 +86,7 @@ open abstract class BaseActivity : AppCompatActivity(), BaseContextView {
     }
 
     override fun showToast(msg: String) {
-        if (null != mContext) {
-            T.show(mContext, msg)
-        }
+        T.show(msg)
     }
 
     @SuppressLint("WrongConstant")
