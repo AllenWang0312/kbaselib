@@ -1,6 +1,7 @@
 package edu.tjrac.swant.baselib.common.base.net
 
 import edu.tjrac.swant.baselib.common.base.BaseApplication
+import edu.tjrac.swant.baselib.util.StringUtils
 import okhttp3.*
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory
@@ -52,12 +53,27 @@ abstract class BaseNet {
                 }
             }
         }
-        return sOkHttpClient!!;
+        return sOkHttpClient!!
     }
 
     /**
      * 设置公共参数
      */
-    abstract fun getInterceptor(): Interceptor
-
+ open   fun getInterceptor(): Interceptor {
+        return Interceptor { chain ->
+            val originalRequest = chain.request()
+            val request: Request
+            val modifiedUrl = originalRequest.url().newBuilder()
+                    // Provide your custom parameter here
+//                    .addQueryParameter("platform", "android")
+//                    .addQueryParameter("version", BuildConfig.VERSION_NAME)
+                    .build()
+            var builder = originalRequest.newBuilder()
+//            if (!StringUtils.isEmpty(App_v4.token)) {
+//                builder.addHeader("token", App_v4.token)
+//            }
+            request = builder.url(modifiedUrl).build()
+            chain.proceed(request)
+        }
+    }
 }
