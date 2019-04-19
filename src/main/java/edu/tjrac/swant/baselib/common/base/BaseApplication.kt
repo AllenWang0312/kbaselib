@@ -1,5 +1,6 @@
 package edu.tjrac.swant.baselib.common.base
 
+import android.app.Activity
 import android.app.Application
 
 /**
@@ -8,21 +9,21 @@ import android.app.Application
 
 abstract class BaseApplication : Application() {
 
-    var activitys: ArrayList<BaseActivity>? = null
+    var activitys: ArrayList<Activity>? = null
 
 
     override fun onCreate() {
         super.onCreate()
     }
 
-    fun addActivity(activity: BaseActivity) {
+    fun addActivity(activity: Activity) {
         if (null === activitys) {
-            activitys = ArrayList<BaseActivity>()
+            activitys = ArrayList<Activity>()
         }
         activitys!!.add(activity)
     }
 
-    fun removeActivity(activity: BaseActivity) {
+    fun removeActivity(activity: Activity) {
         activitys?.remove(activity)
     }
 
