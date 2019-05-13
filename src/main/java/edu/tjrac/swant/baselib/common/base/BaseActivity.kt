@@ -66,9 +66,9 @@ open abstract class BaseActivity : AppCompatActivity(), BaseContextView {
             val styleableRes = Class.forName("com.android.internal.R\$styleable").getField("Window").get(null) as IntArray
             val ta = obtainStyledAttributes(styleableRes)
             val m = ActivityInfo::class.java!!.getMethod("isTranslucentOrFloating", TypedArray::class.java)
-            m.setAccessible(true)
+            m.isAccessible = true
             isTranslucentOrFloating = m.invoke(null, ta) as Boolean
-            m.setAccessible(false)
+            m.isAccessible = false
         } catch (e: Exception) {
             e.printStackTrace()
         }
