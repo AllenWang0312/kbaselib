@@ -25,7 +25,7 @@ import edu.tjrac.swant.baselib.util.UiUtil
  * Created by wpc on 2018-08-02.
  */
 
-open abstract class BaseActivity : AppCompatActivity(), BaseContextView {
+ open abstract class BaseActivity : AppCompatActivity(), BaseContextView {
 
     override fun getContext(): Context {
         return mContext
