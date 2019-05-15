@@ -16,16 +16,14 @@ import android.widget.TextView
 import com.jaeger.library.StatusBarUtil
 import edu.tjrac.swant.baselib.BuildConfig
 import edu.tjrac.swant.baselib.R
-import edu.tjrac.swant.baselib.util.StringUtils
-import edu.tjrac.swant.baselib.util.T
-import edu.tjrac.swant.baselib.util.UiUtil
+import edu.tjrac.swant.baselib.util.*
 
 
 /**
  * Created by wpc on 2018-08-02.
  */
 
- open abstract class BaseActivity : AppCompatActivity(), BaseContextView {
+open abstract class BaseActivity : AppCompatActivity(), BaseContextView {
 
     override fun getContext(): Context {
         return mContext
@@ -33,9 +31,17 @@ import edu.tjrac.swant.baselib.util.UiUtil
 
     lateinit var mContext: Context
     var TAG = javaClass.simpleName
-
+    var themeId = 0
     var progress: Dialog? = null
-//    var progress: ProgressDialog? = null
+
+//    override fun setTheme(resid: Int) {
+//        if(resid==R.style.AppTheme_TranslucentStatus){
+//            super.setTheme(resid)
+//        }else{
+//            Log.i("setTheme",""+resid)
+//            super.setTheme(R.style.AppTheme)
+//        }
+//    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         mContext = this
@@ -77,8 +83,32 @@ import edu.tjrac.swant.baselib.util.UiUtil
     }
 
     open fun initStatusBar() {
-        StatusBarUtil.setTransparent(this)
-        StatusBarUtil.setLightMode(this)
+        Log.i(TAG,""+themeId)
+
+        if (themeId == R.style.AppTheme) {
+//            StatusBarUtil.setLightMode(this)
+//            UiUtil.setStatusTextColor(false,this)
+//            UiUtil.setStatusBar(this, false, false)
+//            NewStatusBarUtil.setStatusBarTextColor(this,true);
+
+        } else if (themeId == R.style.AppTheme_TranslucentStatus) {
+//            StatusBarUtil.setTransparent(this)
+            StatusBarUtil.setDarkMode(this)
+//            UiUtil.setStatusBar(this, true, true)
+//            NewStatusBarUtil.setStatusBarTextColor(this,false);
+        }
+//        if (Build.VERSION.SDK_INT >= 19) {
+//           UiUtil.setStatusBar(this,false,false)
+//        }
+//        if (Build.VERSION.SDK_INT >= 23) {
+//            StatusBarUtil.setTransparent(this)
+//        }
+    }
+
+    override fun setTheme(resid: Int) {
+        Log.i(TAG,"setTheme")
+        super.setTheme(resid)
+        themeId = resid
     }
 
     override fun setTitle(title: CharSequence?) {

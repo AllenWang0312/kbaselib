@@ -71,6 +71,7 @@ object UiUtil {
         }
         return empty
     }
+
     fun dp2px(context: Context, dp: Int): Float {
         return TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp.toFloat(),
                 context.resources.displayMetrics)
@@ -147,23 +148,27 @@ object UiUtil {
      *
      */
     fun setStatusBar(activity: Activity, translate: Boolean, lightStatusTextColor: Boolean) {
+
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {//5.0及以上
-            val decorView = activity.window.decorView
-            val option = View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN or View.SYSTEM_UI_FLAG_LAYOUT_STABLE
-            decorView.systemUiVisibility = option
+
             if (!translate) {
                 activity.window.statusBarColor = activity.resources
                         .getColor(R.color.colorPrimaryDark)
             } else {
+                val decorView = activity.window.decorView
+                val option = View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN or View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+                decorView.systemUiVisibility = option
                 activity.window.statusBarColor = Color.TRANSPARENT
             }
         } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {//4.4到5.0
             val localLayoutParams = activity.window.attributes
             localLayoutParams.flags = WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS or localLayoutParams.flags
         }
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && !lightStatusTextColor) {
-            activity.window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN or View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
-        }
+        setStatusTextColor(lightStatusTextColor, activity)
+
+//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+//            activity.window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN or View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
+//        }
     }
 
     /**
@@ -176,8 +181,8 @@ object UiUtil {
     fun setStatusTextColor(useDart: Boolean, activity: Activity) {
 
         if (isFlyme) {
-            return
-//            processFlyMe(useDart, activity)
+//            return
+            processFlyMe(useDart, activity)
         } else if (isMIUI) {
             processMIUI(useDart, activity)
         } else {
