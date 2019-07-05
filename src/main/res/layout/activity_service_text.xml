@@ -40,7 +40,7 @@
     <!--android:layout_width="wrap_content"-->
     <!--android:layout_height="wrap_content"-->
     <!--android:layout_centerInParent="true"-->
-    <!--android:text="服务条款"-->
+    <!--android:head_chose_file="服务条款"-->
     <!--android:textColor="#ffffff"-->
     <!--android:textSize="17sp" />-->
 

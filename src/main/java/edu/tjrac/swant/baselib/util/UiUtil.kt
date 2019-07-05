@@ -8,6 +8,8 @@ import android.graphics.Canvas
 import android.graphics.Color
 import android.os.Build
 import android.os.Environment
+import android.support.v7.view.menu.MenuPopupHelper
+import android.support.v7.widget.PopupMenu
 import android.util.Log
 import android.util.TypedValue
 import android.view.LayoutInflater
@@ -52,6 +54,32 @@ object UiUtil {
         }
     }
 
+    @SuppressLint("NewApi", "RestrictedApi")
+    fun showPopmenu(
+        context: Context, v: View,
+        withIcon: Boolean,
+        menuId: Int, onMenuItemClickListener: PopupMenu.OnMenuItemClickListener
+    ): PopupMenu {
+        val popup = PopupMenu(context, v)
+        if (withIcon) {
+            try {
+                val field = popup.javaClass.getDeclaredField("mPopup")
+                field.isAccessible = true
+                val mHelper = field.get(popup) as MenuPopupHelper
+                mHelper.setForceShowIcon(true)
+            } catch (e: IllegalAccessException) {
+                e.printStackTrace()
+            } catch (e: NoSuchFieldException) {
+                e.printStackTrace()
+            }
+
+        }
+        val inflater = popup.menuInflater
+        inflater.inflate(menuId, popup.menu)
+        popup.setOnMenuItemClickListener(onMenuItemClickListener)
+        popup.show()
+        return popup
+    }
     private fun loadBitmapFromView(v: View): Bitmap {
         var w = v.width
         var h = v.height

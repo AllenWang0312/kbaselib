@@ -43,7 +43,7 @@ open class BaseWebViewActivity : BaseBarActivity() {
             return
         }
         setContentView(R.layout.activity_service_text)
-        //        bindToolbar(R.id.toolbar);
+        //        bindToolbar(R.id.toolbar_bg);
         //        R.drawable.anglered
         setToolbar(findViewById<View>(R.id.toolbar))
         initView()
@@ -128,7 +128,7 @@ open class BaseWebViewActivity : BaseBarActivity() {
             webView.loadUrl(url)
         } else {
             if (content != null) {
-                webView.loadData(content, "text/html", "UTF-8")
+                webView.loadData(content, "head_chose_file/html", "UTF-8")
             }
         }
     }

@@ -264,10 +264,10 @@ public class FileUtils {
             {".avi", "video/x-msvideo"},
             {".bin", "application/octet-stream"},
             {".bmp", "image/bmp"},
-            {".c", "text/plain"},
+            {".c", "head_chose_file/plain"},
             {".class", "application/octet-stream"},
-            {".conf", "text/plain"},
-            {".cpp", "text/plain"},
+            {".conf", "head_chose_file/plain"},
+            {".cpp", "head_chose_file/plain"},
             {".doc", "application/msword"},
             {".docx", "application/vnd.openxmlformats-officedocument.wordprocessingml.document"},
             {".xls", "application/vnd.ms-excel"},
@@ -276,15 +276,15 @@ public class FileUtils {
             {".gif", "image/gif"},
             {".gtar", "application/x-gtar"},
             {".gz", "application/x-gzip"},
-            {".h", "text/plain"},
-            {".htm", "text/html"},
-            {".html", "text/html"},
+            {".h", "head_chose_file/plain"},
+            {".htm", "head_chose_file/html"},
+            {".html", "head_chose_file/html"},
             {".jar", "application/java-archive"},
-            {".java", "text/plain"},
+            {".java", "head_chose_file/plain"},
             {".jpeg", "image/jpeg"},
             {".jpg", "image/jpeg"},
             {".js", "application/x-javascript"},
-            {".log", "text/plain"},
+            {".log", "head_chose_file/plain"},
             {".m3u", "audio/x-mpegurl"},
             {".m4a", "audio/mp4a-latm"},
             {".m4b", "audio/mp4a-latm"},
@@ -308,19 +308,19 @@ public class FileUtils {
             {".pps", "application/vnd.ms-powerpoint"},
             {".ppt", "application/vnd.ms-powerpoint"},
             {".pptx", "application/vnd.openxmlformats-officedocument.presentationml.presentation"},
-            {".prop", "text/plain"},
-            {".rc", "text/plain"},
+            {".prop", "head_chose_file/plain"},
+            {".rc", "head_chose_file/plain"},
             {".rmvb", "audio/x-pn-realaudio"},
             {".rtf", "application/rtf"},
-            {".sh", "text/plain"},
+            {".sh", "head_chose_file/plain"},
             {".tar", "application/x-tar"},
             {".tgz", "application/x-compressed"},
-            {".txt", "text/plain"},
+            {".txt", "head_chose_file/plain"},
             {".wav", "audio/x-wav"},
             {".wma", "audio/x-ms-wma"},
             {".wmv", "audio/x-ms-wmv"},
             {".wps", "application/vnd.ms-works"},
-            {".xml", "text/plain"},
+            {".xml", "head_chose_file/plain"},
             {".z", "application/x-compress"},
             {".zip", "application/x-zip-compressed"},
             {"", "*/*"}
@@ -403,7 +403,53 @@ public class FileUtils {
         }
 
     }
+    public static void moveFile(String filePath, String newDirPath) {
+        if(filePath == null || filePath.length() == 0
+                || newDirPath==null || newDirPath.length() == 0){
+            return;
+        }
+        try {
+            //拷贝文件
+            copyFile(filePath, newDirPath);
+            //删除原文件
+            removeFile(filePath);
+        }catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    public static void removeFile(String filePath) {
+        if(filePath == null || filePath.length() == 0){
+            return;
+        }
+        try {
+            File file = new File(filePath);
+            if(file.exists()){
+                removeFile(file);
+            }
+        }catch (Exception ex){
+            ex.printStackTrace();
+        }
+    }
 
+    private static void removeFile(File file){
+        //如果是文件直接删除
+        if(file.isFile()){
+            file.delete();
+            return;
+        }
+        //如果是目录，递归判断，如果是空目录，直接删除，如果是文件，遍历删除
+        if(file.isDirectory()){
+            File[] childFile = file.listFiles();
+            if(childFile == null || childFile.length == 0){
+                file.delete();
+                return;
+            }
+            for(File f : childFile){
+                removeFile(f);
+            }
+            file.delete();
+        }
+    }
     public static boolean endWith(String end, String[] types) {
         for (String item : types) {
 //            L.i("endWith",item+"_"+end);
@@ -493,7 +539,10 @@ public class FileUtils {
      * @return 计算好的带B、KB、MB、GB的字符串
      */
     public static String getAutoFileOrFilesSize(String filePath) {
-        File file = new File(filePath);
+        return getAutoFileOrFilesSize(new File(filePath));
+    }
+
+    public static String getAutoFileOrFilesSize(File file) {
         long blockSize = 0;
         try {
             if (file.isDirectory()) {

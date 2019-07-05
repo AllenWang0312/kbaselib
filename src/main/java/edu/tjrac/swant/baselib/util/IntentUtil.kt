@@ -50,6 +50,22 @@ class IntentUtil {
     }
 
     companion object {
+        /**
+         * 打开文件
+         *
+         * @param file
+         */
+        fun openFileIntent( file: File): Intent {
+            val intent = Intent()
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+            //设置intent的Action属性
+            intent.action = Intent.ACTION_VIEW
+            //获取文件file的MIME类型
+            val type = FileUtils.getMIMEType(file)
+            //设置intent的data和Type属性。
+            intent.setDataAndType(Uri.fromFile(file), type)
+            return intent
+        }
 
         fun getCallPhoneIntent(tel: String): Intent {
             val intent = Intent(Intent.ACTION_DIAL)

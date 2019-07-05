@@ -21,6 +21,8 @@ import edu.tjrac.swant.baselib.util.T
 
 open class BaseFragment : Fragment(), BaseContextView {
 
+    protected var TAG = javaClass.simpleName
+
     override fun getContext(): Context {
         return activity!!
     }

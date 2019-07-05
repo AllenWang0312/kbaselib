@@ -9,21 +9,22 @@ import android.app.Application
 
 abstract class BaseApplication : Application() {
 
-    var activitys: ArrayList<Activity>? = null
+    var activitys: ArrayList<BaseActivity>? = null
 
 
     override fun onCreate() {
         super.onCreate()
+        instance=this
     }
 
-    fun addActivity(activity: Activity) {
+    fun addActivity(activity: BaseActivity) {
         if (null === activitys) {
-            activitys = ArrayList<Activity>()
+            activitys = ArrayList<BaseActivity>()
         }
         activitys!!.add(activity)
     }
 
-    fun removeActivity(activity: Activity) {
+    fun removeActivity(activity: BaseActivity) {
         activitys?.remove(activity)
     }
 

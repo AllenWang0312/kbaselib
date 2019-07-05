@@ -13,7 +13,6 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.TextView
-import com.jaeger.library.StatusBarUtil
 import edu.tjrac.swant.baselib.BuildConfig
 import edu.tjrac.swant.baselib.R
 import edu.tjrac.swant.baselib.util.*
@@ -34,23 +33,12 @@ open abstract class BaseActivity : AppCompatActivity(), BaseContextView {
     var themeId = 0
     var progress: Dialog? = null
 
-//    override fun setTheme(resid: Int) {
-//        if(resid==R.style.AppTheme_TranslucentStatus){
-//            super.setTheme(resid)
-//        }else{
-//            Log.i("setTheme",""+resid)
-//            super.setTheme(R.style.AppTheme)
-//        }
-//    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         mContext = this
         super.onCreate(savedInstanceState)
         initStatusBar()
         setOrientation()
-//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-//            findViewById<View>(android.R.id.content).systemUiVisibility = View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN or View.SYSTEM_UI_FLAG_LAYOUT_STABLE
-//        }
         BaseApplication.instance?.addActivity(this)
         Log.e(this.javaClass.simpleName, "onCreate")
     }
@@ -83,26 +71,12 @@ open abstract class BaseActivity : AppCompatActivity(), BaseContextView {
     }
 
     open fun initStatusBar() {
-        Log.i(TAG,""+themeId)
-
         if (themeId == R.style.AppTheme) {
-//            StatusBarUtil.setLightMode(this)
-//            UiUtil.setStatusTextColor(false,this)
-//            UiUtil.setStatusBar(this, false, false)
-//            NewStatusBarUtil.setStatusBarTextColor(this,true);
-
+            UiUtil.setStatusBar(this, false, true)
         } else if (themeId == R.style.AppTheme_TranslucentStatus) {
-//            StatusBarUtil.setTransparent(this)
-            StatusBarUtil.setDarkMode(this)
-//            UiUtil.setStatusBar(this, true, true)
-//            NewStatusBarUtil.setStatusBarTextColor(this,false);
+            UiUtil.setStatusBar(this, true, true)
         }
-//        if (Build.VERSION.SDK_INT >= 19) {
-//           UiUtil.setStatusBar(this,false,false)
-//        }
-//        if (Build.VERSION.SDK_INT >= 23) {
-//            StatusBarUtil.setTransparent(this)
-//        }
+
     }
 
     override fun setTheme(resid: Int) {
