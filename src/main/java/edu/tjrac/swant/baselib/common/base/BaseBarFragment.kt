@@ -23,6 +23,11 @@ abstract class BaseBarFragment : BaseFragment() {
 
     var title: TextView? = null
 
+    var backable = false
+
+    fun backable(): Boolean {
+        return backable
+    }
 
     open fun setToolbar(tool: View) {
         this.tool = tool
@@ -36,37 +41,44 @@ abstract class BaseBarFragment : BaseFragment() {
     }
 
     fun setTitle(t: String) {
-        title!!.visibility=View.VISIBLE
+        title!!.visibility = View.VISIBLE
         title?.text = t
     }
 
     fun setLeftText(text: String, click: View.OnClickListener) {
-        tv_left!!.visibility=View.VISIBLE
+        tv_left!!.visibility = View.VISIBLE
         tv_left!!.text = text
         tv_left!!.setOnClickListener(click)
     }
 
     fun setRightText(text: String, click: View.OnClickListener) {
-        tv_right!!.visibility=View.VISIBLE
+        tv_right!!.visibility = View.VISIBLE
         tv_right!!.text = text
         tv_right!!.setOnClickListener(click)
     }
 
     fun setLeftIcon(id: Int, click: View.OnClickListener) {
-        iv_left!!.visibility=View.VISIBLE
+        iv_left!!.visibility = View.VISIBLE
         iv_left!!.setImageResource(id)
         iv_left!!.setOnClickListener(click)
     }
 
     fun setRightIcon(id: Int, click: View.OnClickListener) {
-        iv_right!!.visibility=View.VISIBLE
+        iv_right!!.visibility = View.VISIBLE
         iv_right!!.setImageResource(id)
         iv_right!!.setOnClickListener(click)
     }
 
     fun setRightIcon2(id: Int, click: View.OnClickListener) {
-        iv_right2!!.visibility=View.VISIBLE
+        iv_right2!!.visibility = View.VISIBLE
         iv_right2!!.setImageResource(id)
         iv_right2!!.setOnClickListener(click)
     }
+
+    fun enableBackIcon() {
+        iv_left?.setImageResource(R.drawable.ic_arrow_back_white_24dp)
+        iv_left?.setOnClickListener(View.OnClickListener { onBack() })
+    }
+
+
 }

@@ -6,7 +6,6 @@ import android.content.Context
 import android.content.pm.ActivityInfo
 import android.content.res.TypedArray
 import android.os.Build
-import android.os.Build.VERSION_CODES.O
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.util.Log
@@ -15,7 +14,10 @@ import android.view.View
 import android.widget.TextView
 import edu.tjrac.swant.baselib.BuildConfig
 import edu.tjrac.swant.baselib.R
-import edu.tjrac.swant.baselib.util.*
+import edu.tjrac.swant.baselib.util.LeakUtil
+import edu.tjrac.swant.baselib.util.StringUtils
+import edu.tjrac.swant.baselib.util.T
+import edu.tjrac.swant.baselib.util.UiUtil
 
 
 /**
@@ -123,7 +125,7 @@ open abstract class BaseActivity : AppCompatActivity(), BaseContextView {
                 var view = LayoutInflater.from(mContext).inflate(R.layout.progress, null)
                 progress = Dialog(mContext, R.style.default_dialog_style)
                 progress!!.setContentView(view)
-//            progress = ProgressDialog(mContext)
+//            prog = ProgressDialog(mContext)
             }
             var tv_progress = progress!!.findViewById<TextView>(R.id.tv_progress)
             if (!StringUtils.isEmpty(text)) {
@@ -138,6 +140,9 @@ open abstract class BaseActivity : AppCompatActivity(), BaseContextView {
 
     override fun onDestroy() {
         BaseApplication.instance?.removeActivity(this)
+        if ("huawei,honor".contains(Build.BRAND.toLowerCase()) && Build.VERSION.SDK_INT < Build.VERSION_CODES.O) {
+            LeakUtil.fixInputMethodManagerLeak(this)
+        }
         super.onDestroy()
         Log.e(this.javaClass.simpleName, "onDeatroy")
     }

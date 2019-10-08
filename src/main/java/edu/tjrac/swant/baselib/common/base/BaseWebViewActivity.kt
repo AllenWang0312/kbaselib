@@ -31,8 +31,9 @@ open class BaseWebViewActivity : BaseBarActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         UiUtil.setStatusBar(this@BaseWebViewActivity, false, false)
-        url = intent.getStringExtra("url") + "?time=" + System.currentTimeMillis()
-        titleStr = intent.getStringExtra("title")
+        url = intent.getStringExtra("url")
+//        + "?time=" + System.currentTimeMillis()
+        titleStr = intent.getStringExtra("tital")
         content = intent.getStringExtra("content")
 
         if (url != null || content != null) {
@@ -166,13 +167,13 @@ open class BaseWebViewActivity : BaseBarActivity() {
         fun start(activity: Context, title: String, url: String) {
             activity.startActivity(Intent(activity, BaseWebViewActivity::class.java)
                     .putExtra("url", url)
-                    .putExtra("title", title))
+                    .putExtra("tital", title))
         }
 
         fun startWithContent(activity: FragmentActivity, title: String, content: String) {
             activity.startActivity(Intent(activity, BaseWebViewActivity::class.java)
                     .putExtra("content", content)
-                    .putExtra("title", title))
+                    .putExtra("tital", title))
         }
     }
 }

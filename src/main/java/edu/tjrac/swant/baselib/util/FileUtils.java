@@ -2,21 +2,13 @@ package edu.tjrac.swant.baselib.util;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.AssetManager;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Environment;
 import android.support.v4.content.FileProvider;
 
-import org.jetbrains.annotations.NotNull;
-
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
+import java.io.*;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 
@@ -27,24 +19,79 @@ import java.util.ArrayList;
 
 public class FileUtils {
 
+    public static void openFile(Context context, File file) {
+        Intent intent = new Intent();
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        intent.setAction(Intent.ACTION_VIEW);
+        String type = FileUtils.getMIMEType(file);
 
-//    内置sd卡路径
-//    String sdcardPath = System.getenv("EXTERNAL_STORAGE");
-//    内置sd卡路径
-//    String sdcardPath = Environment.getExternalStorageDirectory().getAbsolutePath();
-    //外置置sd卡路径
-//    String extSdcardPath = System.getenv("SECONDARY_STORAGE");
-
-    public static String getSDcardPath() {
-//        Environment.getDownloadCacheDirectory().getAbsolutePath()
-        return Environment.getExternalStorageDirectory().getPath();
+        if(Build.VERSION.SDK_INT >= 26) {
+            Uri contentUri = FileProvider.getUriForFile(context.getApplicationContext(), "edu.tjrac.swant.wjzx.provider", file);
+            intent.setDataAndType(contentUri, type);
+        } else {
+            intent.setDataAndType(Uri.fromFile(file), type);
+        }
+        context.startActivity(intent);
     }
+//    public static void openFile(Context context, @NotNull File file) {
+//        Intent intent = new Intent();
+//        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+//        //设置intent的Action属性
+//        intent.setAction(Intent.ACTION_VIEW);
+//        //获取文件file的MIME类型
+//        String type = getMIMEType(file);
+//        //设置intent的data和Type属性。
+//        Uri uri = null;
+//        if (Build.VERSION.SDK_INT >= 24) {
+//            uri = FileProvider.getUriForFile(context.getApplicationContext(), "lms2.xz.act.provider", file);
+//        } else {
+//            uri = Uri.fromFile(file);
+//        }
+//        intent.setDataAndType(uri, type);
+//        //跳转
+//        context.startActivity(intent);
+//    }
 
-    public static String getExtSDCardPath() {
-        return System.getenv("SECONDARY_STORAGE");
-    }
+//    @SuppressLint("NewApi")
+//    public static void showChoseFileToPlayDialog(String dirPath,
+//                                                 String fileType, final Activity context) {
+//        if (new File(dirPath).exists()) {
+//            Log.i("目录存在", dirPath);
+//            final ArrayList<FileInfo> items = getFileInfoListWithDirPathAndEnd(
+//                    dirPath, fileType);
+//            if (items.size() == 0) {
+//                Toast.makeText(context, "文件夹为空", Toast.LENGTH_SHORT).show();
+//            } else {
+//                ChoseFileDialog dialog = new ChoseFileDialog(context, items,
+//                        new AdapterView.OnItemClickListener() {
+//                            @Override
+//                            public void onItemClick(AdapterView<?> arg0,
+//                                                    View arg1, int arg2, long arg3) {
+//                                // TODO Auto-generated method stub
+//                                FileInfo fi = items.get(arg2);
+//                                String path = fi.getDirPath() + fi.getName();
+//                                openFile(context, new File(path));
+//                            }
+//                        }, null);
+//                dialog.show(context.getFragmentManager(), "chosefiledialog");
+//            }
+//
+//            // if (MainActivity.videodatas == null
+//            // || MainActivity.videodatas.size() <= 0) {
+//            // Toast.makeText(SoftUpdateActivity.this, "路径下不存在视频",
+//            // Toast.LENGTH_SHORT).show();
+//            // } else {
+//            // MainActivity.videolist_layout
+//            // .setVisibility(View.VISIBLE);
+//            // }
+//        } else {
+//            Toast.makeText(context, "目录不存在", Toast.LENGTH_SHORT).show();
+//        }
+//    }
 
-    public static String getSizeString(long size) {
+
+
+ static String getSizeString(long size) {
         if (size / 1000 / 1000 / 1000f > 1) {
             return size / 1000 / 1000 / 1000f + "G";
         } else {
@@ -338,8 +385,12 @@ public class FileUtils {
             int bytesum = 0;
             int byteread = 0;
             File oldfile = new File(oldPath);
+            File newfile = new File(newPath);
             if (oldfile.exists()) { //文件存在时
                 InputStream inStream = new FileInputStream(oldPath); //读入原文件
+                if(!newfile.exists()){
+                    newfile.createNewFile();
+                }
                 FileOutputStream fs = new FileOutputStream(newPath);
                 byte[] buffer = new byte[1444];
                 int length;
@@ -349,6 +400,7 @@ public class FileUtils {
                     fs.write(buffer, 0, byteread);
                 }
                 inStream.close();
+                fs.close();
             }
         } catch (Exception e) {
             System.out.println("复制单个文件操作出错");
@@ -410,7 +462,9 @@ public class FileUtils {
         }
         try {
             //拷贝文件
-            copyFile(filePath, newDirPath);
+
+            String name=filePath.substring(filePath.lastIndexOf("/"));
+            copyFile(filePath, newDirPath+name);
             //删除原文件
             removeFile(filePath);
         }catch (Exception e) {
@@ -481,7 +535,7 @@ public class FileUtils {
         if (dotIndex < 0) {
             return "";
         }
-        return file.substring(dotIndex, file.length()).toLowerCase();
+        return file.substring(dotIndex).toLowerCase();
     }
 
 
@@ -562,7 +616,6 @@ public class FileUtils {
      *
      * @param file
      * @return
-     * @throws Exception
      */
     private static long getFileSize(File file) throws Exception {
         long size = 0;
@@ -704,22 +757,37 @@ public class FileUtils {
         return sb.toString();
     }
 
-    public static void openFile(Context context, @NotNull File file) {
-        Intent intent = new Intent();
-        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        //设置intent的Action属性
-        intent.setAction(Intent.ACTION_VIEW);
-        //获取文件file的MIME类型
-        String type = getMIMEType(file);
-        //设置intent的data和Type属性。
-        Uri uri = null;
-        if (Build.VERSION.SDK_INT >= 24) {
-            uri = FileProvider.getUriForFile(context.getApplicationContext(), "lms2.xz.act.provider", file);
-        } else {
-            uri = Uri.fromFile(file);
+    public static String getFromAssets(Context context, String fileName) {
+        String line = "";
+        String Result = "";
+        try {
+            InputStreamReader inputReader = new InputStreamReader(context.getResources().getAssets().open(fileName));
+            BufferedReader bufReader = new BufferedReader(inputReader);
+
+            while ((line = bufReader.readLine()) != null)
+                Result += line;
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-        intent.setDataAndType(uri, type);
-        //跳转
-        context.startActivity(intent);
+
+        return Result;
+    }
+    public static String getJson(Context mContext, String fileName) {
+        // TODO Auto-generated method stub
+        StringBuilder sb = new StringBuilder();
+        AssetManager am = mContext.getAssets();
+        try {
+            BufferedReader br = new BufferedReader(new InputStreamReader(
+                    am.open(fileName)));
+            String next = "";
+            while (null != (next = br.readLine())) {
+                sb.append(next);
+            }
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+            sb.delete(0, sb.length());
+        }
+        return sb.toString().trim();
     }
 }

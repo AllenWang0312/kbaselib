@@ -19,9 +19,13 @@ import edu.tjrac.swant.baselib.util.T
  * Created by wpc on 2018-08-02.
  */
 
-open class BaseFragment : Fragment(), BaseContextView {
+open  class BaseFragment : Fragment(), BaseContextView {
 
     protected var TAG = javaClass.simpleName
+
+     open fun onBack(){
+
+     }
 
     override fun getContext(): Context {
         return activity!!
@@ -67,7 +71,7 @@ open class BaseFragment : Fragment(), BaseContextView {
                 var view = LayoutInflater.from(activity).inflate(R.layout.progress, null)
                 progress = Dialog(activity, R.style.default_dialog_style)
                 progress!!.setContentView(view)
-//            progress = ProgressDialog(mContext)
+//            prog = ProgressDialog(mContext)
             }
             if (!StringUtils.isEmpty(text)) {
                 progress!!.findViewById<TextView>(R.id.tv_progress).setText(text)
