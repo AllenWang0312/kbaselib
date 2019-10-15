@@ -5,7 +5,7 @@
     <color name="colorPrimaryDark">#ffffff</color>
     <color name="colorAccent">#cc6fd3</color>
 
-    <color name="windowBackground">#1e1c2a</color>
+    <color name="windowBackground">#ffffff</color>
 
     <color name="text_color_primary">#000</color>//默认文字颜色
     <color name="text_color_summary">#696870</color>

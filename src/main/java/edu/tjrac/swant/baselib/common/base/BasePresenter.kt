@@ -11,6 +11,7 @@ abstract class BasePresenter {
 
     var subscriptions: ArrayList<Subscription>? = null
 
+    //安全网路请求添加到队列中  在退出时解除观察
     fun addSubscription(objects: Subscription) {
         if (subscriptions == null) {
             subscriptions = ArrayList<Subscription>()
