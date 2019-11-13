@@ -58,7 +58,7 @@ open class BaseWebViewActivity : BaseBarActivity() {
         if (null != titleStr) {
             setTitle(titleStr)
         }
-        setLeftIcon2(R.drawable.close, View.OnClickListener { v ->
+        setLeftIcon2(R.drawable.close, View.OnClickListener { _ ->
             finish()
         })
     }

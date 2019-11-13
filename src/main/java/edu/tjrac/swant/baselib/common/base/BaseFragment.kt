@@ -19,13 +19,18 @@ import edu.tjrac.swant.baselib.util.T
  * Created by wpc on 2018-08-02.
  */
 
-open  class BaseFragment : Fragment(), BaseContextView {
+open class BaseFragment : Fragment(), BaseContextView {
 
     protected var TAG = javaClass.simpleName
+    open fun onBack() {
 
-     open fun onBack(){
-
-     }
+    }
+    open fun backable():Boolean {
+return false
+    }
+    open fun getTitle():String{
+        return ""
+    }
 
     override fun getContext(): Context {
         return activity!!

@@ -24,14 +24,18 @@ public class FileUtils {
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         intent.setAction(Intent.ACTION_VIEW);
         String type = FileUtils.getMIMEType(file);
-
-        if(Build.VERSION.SDK_INT >= 26) {
-            Uri contentUri = FileProvider.getUriForFile(context.getApplicationContext(), "edu.tjrac.swant.wjzx.provider", file);
-            intent.setDataAndType(contentUri, type);
-        } else {
-            intent.setDataAndType(Uri.fromFile(file), type);
-        }
+        Uri url = FileUtils.getUriFromFile(context,file);
+        intent.setDataAndType(url, type);
         context.startActivity(intent);
+    }
+
+    private static Uri getUriFromFile(Context context, File file) {
+        if (Build.VERSION.SDK_INT >  Build.VERSION_CODES.M) {
+            String authority = context.getPackageName() + ".provider";
+            return FileProvider.getUriForFile(context, authority, file);
+        } else {
+            return Uri.fromFile(file);
+        }
     }
 //    public static void openFile(Context context, @NotNull File file) {
 //        Intent intent = new Intent();
@@ -90,8 +94,7 @@ public class FileUtils {
 //    }
 
 
-
- static String getSizeString(long size) {
+    static String getSizeString(long size) {
         if (size / 1000 / 1000 / 1000f > 1) {
             return size / 1000 / 1000 / 1000f + "G";
         } else {
@@ -388,7 +391,7 @@ public class FileUtils {
             File newfile = new File(newPath);
             if (oldfile.exists()) { //文件存在时
                 InputStream inStream = new FileInputStream(oldPath); //读入原文件
-                if(!newfile.exists()){
+                if (!newfile.exists()) {
                     newfile.createNewFile();
                 }
                 FileOutputStream fs = new FileOutputStream(newPath);
@@ -455,55 +458,58 @@ public class FileUtils {
         }
 
     }
+
     public static void moveFile(String filePath, String newDirPath) {
-        if(filePath == null || filePath.length() == 0
-                || newDirPath==null || newDirPath.length() == 0){
+        if (filePath == null || filePath.length() == 0
+                || newDirPath == null || newDirPath.length() == 0) {
             return;
         }
         try {
             //拷贝文件
 
-            String name=filePath.substring(filePath.lastIndexOf("/"));
-            copyFile(filePath, newDirPath+name);
+            String name = filePath.substring(filePath.lastIndexOf("/"));
+            copyFile(filePath, newDirPath + name);
             //删除原文件
             removeFile(filePath);
-        }catch (Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
+
     public static void removeFile(String filePath) {
-        if(filePath == null || filePath.length() == 0){
+        if (filePath == null || filePath.length() == 0) {
             return;
         }
         try {
             File file = new File(filePath);
-            if(file.exists()){
+            if (file.exists()) {
                 removeFile(file);
             }
-        }catch (Exception ex){
+        } catch (Exception ex) {
             ex.printStackTrace();
         }
     }
 
-    private static void removeFile(File file){
+    private static void removeFile(File file) {
         //如果是文件直接删除
-        if(file.isFile()){
+        if (file.isFile()) {
             file.delete();
             return;
         }
         //如果是目录，递归判断，如果是空目录，直接删除，如果是文件，遍历删除
-        if(file.isDirectory()){
+        if (file.isDirectory()) {
             File[] childFile = file.listFiles();
-            if(childFile == null || childFile.length == 0){
+            if (childFile == null || childFile.length == 0) {
                 file.delete();
                 return;
             }
-            for(File f : childFile){
+            for (File f : childFile) {
                 removeFile(f);
             }
             file.delete();
         }
     }
+
     public static boolean endWith(String end, String[] types) {
         for (String item : types) {
 //            L.i("endWith",item+"_"+end);
@@ -772,6 +778,7 @@ public class FileUtils {
 
         return Result;
     }
+
     public static String getJson(Context mContext, String fileName) {
         // TODO Auto-generated method stub
         StringBuilder sb = new StringBuilder();

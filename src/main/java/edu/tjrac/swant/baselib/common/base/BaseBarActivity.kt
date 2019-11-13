@@ -92,7 +92,7 @@ abstract class BaseBarActivity : BaseActivity() {
     }
 
     fun enableBackIcon(red_id: Int) {
-        this.setLeftIcon(red_id,View.OnClickListener { view ->
+        this.setLeftIcon(red_id,View.OnClickListener { _ ->
             iv_left!!.visibility = View.VISIBLE
             onBackPressed()
         })

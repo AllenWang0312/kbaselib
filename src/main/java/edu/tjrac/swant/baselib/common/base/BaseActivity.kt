@@ -24,7 +24,7 @@ import edu.tjrac.swant.baselib.util.UiUtil
  * Created by wpc on 2018-08-02.
  */
 
-open abstract class BaseActivity : AppCompatActivity(), BaseContextView {
+ abstract class BaseActivity : AppCompatActivity(), BaseContextView {
 
     override fun getContext(): Context {
         return mContext
@@ -61,7 +61,7 @@ open abstract class BaseActivity : AppCompatActivity(), BaseContextView {
         try {
             val styleableRes = Class.forName("com.android.internal.R\$styleable").getField("Window").get(null) as IntArray
             val ta = obtainStyledAttributes(styleableRes)
-            val m = ActivityInfo::class.java!!.getMethod("isTranslucentOrFloating", TypedArray::class.java)
+            val m = ActivityInfo::class.java.getMethod("isTranslucentOrFloating", TypedArray::class.java)
             m.isAccessible = true
             isTranslucentOrFloating = m.invoke(null, ta) as Boolean
             m.isAccessible = false

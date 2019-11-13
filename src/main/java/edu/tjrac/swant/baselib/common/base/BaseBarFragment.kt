@@ -23,11 +23,6 @@ abstract class BaseBarFragment : BaseFragment() {
 
     var title: TextView? = null
 
-    var backable = false
-
-    fun backable(): Boolean {
-        return backable
-    }
 
     open fun setToolbar(tool: View) {
         this.tool = tool
