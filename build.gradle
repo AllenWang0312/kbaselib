@@ -36,11 +36,11 @@ dependencies {
 //    api 'com.jaeger.statusbarutil:library:1.5.1'
     //    implementation 'com.android.support:recyclerview-v7:27.1.1'
     //    implementation 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.30'
-    api "com.android.support:support-v4:27.1.0"
-    api "com.android.support:design:27.1.1"
-    api 'com.android.support:appcompat-v7:27.1.1'
-    api 'com.android.support:support-annotations:27.1.1'
-    api 'com.android.support:support-fragment:27.1.1'
+    api "com.android.support:support-v4:$androidSupportVersion"
+    api "com.android.support:design:$androidSupportVersion"
+    api "com.android.support:appcompat-v7:$androidSupportVersion"
+    api "com.android.support:support-annotations:$androidSupportVersion"
+    api "com.android.support:support-fragment:$androidSupportVersion"
     api 'com.android.support.constraint:constraint-layout:1.1.3'
 
     //    implementation 'com.android.support:cardview-v7:27.1.1'
