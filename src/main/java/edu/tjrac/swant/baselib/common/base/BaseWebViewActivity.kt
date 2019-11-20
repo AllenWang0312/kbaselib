@@ -22,6 +22,8 @@ open class BaseWebViewActivity : BaseBarActivity() {
 
     var titleStr: String? = null
     private var url: String? = null
+    private var config:Boolean?=false
+
     internal var content: String? = null
 
     lateinit var progressBar: ProgressBar
@@ -31,11 +33,11 @@ open class BaseWebViewActivity : BaseBarActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         UiUtil.setStatusBar(this@BaseWebViewActivity, false, false)
-        url = intent.getStringExtra("url")
+        if(intent.hasExtra("url")) url = intent.getStringExtra("url")
 //        + "?time=" + System.currentTimeMillis()
-        titleStr = intent.getStringExtra("tital")
-        content = intent.getStringExtra("content")
-
+        if(intent.hasExtra("tital"))  titleStr = intent.getStringExtra("tital")
+        if(intent.hasExtra("content")) content = intent.getStringExtra("content")
+        if(intent.hasExtra("config"))  config=intent?.getBooleanExtra("config",false)
         if (url != null || content != null) {
 
         } else {
@@ -61,13 +63,17 @@ open class BaseWebViewActivity : BaseBarActivity() {
         setLeftIcon2(R.drawable.close, View.OnClickListener { _ ->
             finish()
         })
+//        if(config!!){
+//            setRightIcon2(R.drawable.more, View.OnClickListener{
+//            })
+//        }
     }
 
     open fun initView() {
         webView = findViewById<View>(R.id.webview) as WebView
         progressBar = findViewById<View>(R.id.progress) as ProgressBar
         val settings = webView.settings
-        settings.javaScriptEnabled = true
+        settings.javaScriptEnabled = false
         //设置自适应屏幕，两者合用
         settings.useWideViewPort = true //将图片调整到适合webview的大小
         settings.loadWithOverviewMode = true // 缩放至屏幕的大小

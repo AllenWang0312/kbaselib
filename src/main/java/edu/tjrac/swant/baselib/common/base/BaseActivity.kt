@@ -78,7 +78,6 @@ import edu.tjrac.swant.baselib.util.UiUtil
         } else if (themeId == R.style.AppTheme_TranslucentStatus) {
             UiUtil.setStatusBar(this, true, true)
         }
-
     }
 
     override fun setTheme(resid: Int) {
@@ -87,9 +86,9 @@ import edu.tjrac.swant.baselib.util.UiUtil
         themeId = resid
     }
 
-    override fun setTitle(title: CharSequence?) {
-        super.setTitle(title)
-    }
+//    override fun setTitle(title: CharSequence?) {
+//        super.setTitle(title)
+//    }
 
     override fun showToast(msg: String) {
         T.show(msg)

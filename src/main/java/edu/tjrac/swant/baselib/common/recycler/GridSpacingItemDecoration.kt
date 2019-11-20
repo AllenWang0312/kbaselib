@@ -11,9 +11,7 @@ class GridSpacingItemDecoration(private val spanCount: Int //列数
                                 , private val vertical_spacing: Int
                                 , private val spacing: Int //间隔
 ) : RecyclerView.ItemDecoration() {
-
-    override fun getItemOffsets(outRect: Rect, view: View, parent: RecyclerView, state: RecyclerView.State?) {
-
+    override fun getItemOffsets(outRect: Rect, view: View, parent: RecyclerView, state: RecyclerView.State) {
         //这里是关键，需要根据你有几列来判断
         val position = parent.getChildAdapterPosition(view) // item position
         val column = position % spanCount // item column
@@ -25,4 +23,5 @@ class GridSpacingItemDecoration(private val spanCount: Int //列数
         outRect.bottom = vertical_spacing / 2
 //        }
     }
+
 }
