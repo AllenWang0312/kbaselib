@@ -1,8 +1,10 @@
 package edu.tjrac.swant.baselib.common.base.net
 
 import edu.tjrac.swant.baselib.common.base.BaseApplication
-import edu.tjrac.swant.baselib.util.StringUtils
-import okhttp3.*
+import okhttp3.Cache
+import okhttp3.Interceptor
+import okhttp3.OkHttpClient
+import okhttp3.Request
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
@@ -47,7 +49,7 @@ abstract class BaseNet {
                 if (null === sOkHttpClient) {
                     sOkHttpClient = OkHttpClient.Builder()
                             .cache(cache)
-                            .readTimeout(20, TimeUnit.SECONDS)
+                            .readTimeout(10, TimeUnit.SECONDS)
                             .addInterceptor(getInterceptor())
                             .build()
                 }
