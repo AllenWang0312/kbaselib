@@ -13,3 +13,5 @@
 /captures
 .externalNativeBuild
 
+src/main/res_ui/values-night/wjzx_ui_config.xml
+src/main/res_ui/values/wjzx_ui_config.xml
