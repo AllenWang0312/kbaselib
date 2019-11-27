@@ -5,9 +5,8 @@
     <!--<solid android:color="@color/button_positive_color"></solid>-->
     <gradient
         android:angle="45"
-        android:startColor="@color/button_positive_startcolor"
+        android:startColor="@color/button_positive_start_color"
         android:centerColor="@color/colorPrimary"
-        android:endColor="@color/button_positive_endcolor"
-
+        android:endColor="@color/button_positive_end_color"
         ></gradient>
 </shape>
