@@ -24,6 +24,7 @@ public class TimeUtils {
 
     public static final String NO_BLANK = "yyyyMMddHHmmss";
     public static final String CHINESE_COLON = "yyyy年MM月dd日 HH:mm:ss";
+    public static final String YMD = "yyyy-MM-dd";
     public static final String BLANK_COLON = "yyyy-MM-dd HH:mm:ss";
     public static final String MONTH_DAY_NO_ZERO = "yyyy-M-d HH:mm:ss";
 
