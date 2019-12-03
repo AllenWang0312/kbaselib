@@ -25,10 +25,12 @@ open class BaseFragment : Fragment(), BaseContextView {
     open fun onBack() {
 
     }
-    open fun backable():Boolean {
-return false
+
+    open fun backable(): Boolean {
+        return false
     }
-    open fun getTitle():String{
+
+    open fun getTitle(): String {
         return ""
     }
 
