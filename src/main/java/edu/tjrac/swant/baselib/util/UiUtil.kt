@@ -15,8 +15,11 @@ import android.util.TypedValue
 import android.view.LayoutInflater
 import android.view.View
 import android.view.WindowManager
+import android.widget.FrameLayout
 import android.widget.ImageView
+import android.widget.LinearLayout
 import android.widget.TextView
+import com.bumptech.glide.Glide
 import edu.tjrac.swant.baselib.R
 import java.io.File
 import java.io.FileInputStream
@@ -56,9 +59,9 @@ object UiUtil {
 
     @SuppressLint("NewApi", "RestrictedApi")
     fun showPopmenu(
-        context: Context, v: View,
-        withIcon: Boolean,
-        menuId: Int, onMenuItemClickListener: PopupMenu.OnMenuItemClickListener
+            context: Context, v: View,
+            withIcon: Boolean,
+            menuId: Int, onMenuItemClickListener: PopupMenu.OnMenuItemClickListener
     ): PopupMenu {
         val popup = PopupMenu(context, v)
         if (withIcon) {
@@ -80,6 +83,7 @@ object UiUtil {
         popup.show()
         return popup
     }
+
     private fun loadBitmapFromView(v: View): Bitmap {
         var w = v.width
         var h = v.height
@@ -333,5 +337,21 @@ object UiUtil {
     @SuppressLint("WrongConstant")
     fun visiableORgone(view: View, visiable: Boolean) {
         view.visibility = if (visiable) View.VISIBLE else View.GONE
+    }
+
+    fun inflateGallery(context: Context, ll: LinearLayout?, padding: Int, images: ArrayList<String>) {
+        var width = ll?.width!!
+        var itemWidth = (width - padding * 4) / 3
+
+        var frame = FrameLayout(context)
+        frame.layoutParams = LinearLayout.LayoutParams(width, width)
+        for (i in 0 until images.size) {
+            var url = images.get(i)
+            var image = ImageView(context)
+            image.layoutParams = FrameLayout.LayoutParams(itemWidth, itemWidth)
+            Glide.with(context).load(url).into(image)
+            frame.addView(image, (i % 3) * itemWidth + (i % 3 + 1) * padding, (i / 3) * itemWidth + (i / 3 + 1) * padding)
+        }
+        ll.addView(frame)
     }
 }
