@@ -97,11 +97,11 @@ open class BaseFragment : Fragment(), BaseContextView {
 
     override fun onResume() {
         super.onResume()
-        Log.e(this.javaClass.simpleName, "onResume")
+        Log.d(this.javaClass.simpleName, "onResume")
     }
 
     override fun onPause() {
         super.onPause()
-        Log.e(this.javaClass.simpleName, "onPause")
+        Log.d(this.javaClass.simpleName, "onPause")
     }
 }

@@ -42,7 +42,7 @@ import edu.tjrac.swant.baselib.util.UiUtil
         initStatusBar()
         setOrientation()
         BaseApplication.instance?.addActivity(this)
-        Log.e(this.javaClass.simpleName, "onCreate")
+        Log.d(this.javaClass.simpleName, "onCreate")
     }
 
     protected fun setOrientation() {
@@ -81,7 +81,7 @@ import edu.tjrac.swant.baselib.util.UiUtil
     }
 
     override fun setTheme(resid: Int) {
-        Log.i(TAG,"setTheme")
+        Log.d(TAG,"setTheme")
         super.setTheme(resid)
         themeId = resid
     }
@@ -143,7 +143,7 @@ import edu.tjrac.swant.baselib.util.UiUtil
             LeakUtil.fixInputMethodManagerLeak(this)
         }
         super.onDestroy()
-        Log.e(this.javaClass.simpleName, "onDeatroy")
+        Log.d(this.javaClass.simpleName, "onDeatroy")
     }
 
     override fun onResume() {
@@ -159,7 +159,7 @@ import edu.tjrac.swant.baselib.util.UiUtil
         }
 
 
-        Log.e(this.javaClass.simpleName, "onResume")
+        Log.d(this.javaClass.simpleName, "onResume")
     }
 
     override fun onPause() {
@@ -174,7 +174,7 @@ import edu.tjrac.swant.baselib.util.UiUtil
             }
         }
 
-        Log.e(this.javaClass.simpleName, "onPause")
+        Log.d(this.javaClass.simpleName, "onPause")
     }
 
 }
