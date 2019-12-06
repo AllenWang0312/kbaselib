@@ -9,7 +9,8 @@
     <color name="colorPrimary">#2C2C2C</color>
     <color name="colorPrimaryDark">#232323</color>
     <color name="colorPrimaryLight">#474747</color>
-    <color name="colorAccent">#5C38FF</color>
+    <!--<color name="colorAccent">#5C38FF</color>-->
+    <color name="colorAccent">#FF52A0</color>
     <color name="colorNormal">#979BA6</color>
 
     <color name="windowBackground">#1e1c2a</color>

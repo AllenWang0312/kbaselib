@@ -4,7 +4,8 @@
     <color name="colorPrimary">#ffffff</color>
     <color name="colorPrimaryDark">#ffffff</color>
     <color name="colorPrimaryLight">#474747</color>
-    <color name="colorAccent">#cc6fd3</color>
+    <!--<color name="colorAccent">#cc6fd3</color>-->
+    <color name="colorAccent">#FF52A0</color>
     <color name="colorNormal">#979BA6</color>
 
     <color name="windowBackground">#ffffff</color>
