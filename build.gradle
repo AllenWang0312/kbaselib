@@ -8,6 +8,7 @@ android {
     compileSdkVersion 27
     sourceSets {
         main.res.srcDirs += 'src/main/res_ui'
+        main.res.srcDirs += 'src/main/res_biubiu'
 //        main.assets.srcDirs += 'src/main/assets_tensorflow'
         main.jniLibs.srcDirs = ['libs']
     }
