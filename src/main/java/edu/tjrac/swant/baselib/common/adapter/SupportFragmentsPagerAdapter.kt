@@ -10,7 +10,7 @@ import java.util.*
 /**
  * Created by wpc on 2016/11/18.
  */
-class FragmentsPagerAdapter(fm: FragmentManager) : FragmentStatePagerAdapter(fm) {
+class SupportFragmentsPagerAdapter(fm: FragmentManager) : FragmentStatePagerAdapter(fm) {
 
     val mFragments: MutableList<Fragment> = ArrayList()
     val mFragmentTitles: MutableList<String> = ArrayList()

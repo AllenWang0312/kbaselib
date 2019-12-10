@@ -90,6 +90,7 @@ import edu.tjrac.swant.baselib.util.UiUtil
 //        super.setTitle(title)
 //    }
 
+    //baseview
     override fun showToast(msg: String) {
         T.show(msg)
     }

@@ -1,6 +1,5 @@
 package edu.tjrac.swant.baselib.common.base
 
-import android.app.Activity
 import android.app.Application
 
 /**
@@ -30,7 +29,7 @@ abstract class BaseApplication : Application() {
 
     fun exit() {
         for (item in activitys!!) {
-            item.finish()
+            item?.finish()
         }
         activitys!!.clear()
     }

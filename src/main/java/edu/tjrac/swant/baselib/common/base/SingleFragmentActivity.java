@@ -5,7 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import edu.tjrac.swant.baselib.R;
 
-public class FragmentActivity extends BaseActivity {
+public class SingleFragmentActivity extends BaseActivity {
 
     public static BaseFragment content;
 
@@ -24,7 +24,7 @@ public class FragmentActivity extends BaseActivity {
     }
     public static void start(Context context, BaseFragment fragment) {
         content = fragment;
-        context.startActivity(new Intent(context, FragmentActivity.class));
+        context.startActivity(new Intent(context, SingleFragmentActivity.class));
     }
     @Override
     public void onBackPressed() {
