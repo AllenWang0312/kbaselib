@@ -10,7 +10,7 @@ import android.text.style.RelativeSizeSpan
 import android.util.Log
 import java.util.regex.Pattern
 
-class StringUtils private constructor() {
+class SUtil private constructor() {
 
     init {
         throw UnsupportedOperationException("u can't fuck me...")

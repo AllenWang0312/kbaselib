@@ -73,7 +73,7 @@ abstract class BaseNet {
 //                    .addQueryParameter("version", BuildConfig.VERSION_NAME)
                     .build()
             var builder = originalRequest.newBuilder()
-//            if (!StringUtils.isEmpty(App_v4.token)) {
+//            if (!SUtil.isEmpty(App_v4.token)) {
 //                builder.addHeader("token", App_v4.token)
 //            }
             request = builder.url(modifiedUrl).build()

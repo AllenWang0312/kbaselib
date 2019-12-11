@@ -5,7 +5,7 @@ import com.google.gson.TypeAdapter
 import com.google.gson.stream.JsonReader
 import com.google.gson.stream.JsonToken
 import com.google.gson.stream.JsonWriter
-import edu.tjrac.swant.baselib.util.StringUtils
+import edu.tjrac.swant.baselib.util.SUtil
 
 /**
  * Created by wpc on 2018-12-27.
@@ -38,10 +38,10 @@ class IntegerTypeAdapter : TypeAdapter<Int>() {
                 return 0
             } else if (`in`.peek() == JsonToken.STRING) {
                 val str = `in`.nextString()
-                if (null == str || StringUtils.isEmpty(str)) {
+                if (null == str || SUtil.isEmpty(str)) {
                     return 0
                 } else {
-                    if (StringUtils.isInteger(str)) {
+                    if (SUtil.isInteger(str)) {
                         return Integer.parseInt(str)
                     } else {
                         Log.e("TypeAdapter", "$str is not a int number")

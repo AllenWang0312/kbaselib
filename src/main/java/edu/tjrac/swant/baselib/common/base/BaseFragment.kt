@@ -11,7 +11,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import edu.tjrac.swant.baselib.R
-import edu.tjrac.swant.baselib.util.StringUtils
+import edu.tjrac.swant.baselib.util.SUtil
 import edu.tjrac.swant.baselib.util.T
 
 
@@ -80,7 +80,7 @@ open class BaseFragment : Fragment(), BaseContextView {
                 progress!!.setContentView(view)
 //            prog = ProgressDialog(mContext)
             }
-            if (!StringUtils.isEmpty(text)) {
+            if (!SUtil.isEmpty(text)) {
                 progress!!.findViewById<TextView>(R.id.tv_progress).setText(text)
             } else {
                 progress!!.findViewById<TextView>(R.id.tv_progress).setText("")

@@ -21,7 +21,6 @@ public class CircularAnim {
         void onAnimationEnd();
     }
 
-    @SuppressLint("NewApi")
     public static class VisibleBuilder {
         private View mAnimView, mTriggerView;
 

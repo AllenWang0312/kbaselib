@@ -7,7 +7,7 @@ import com.google.gson.stream.JsonReader
 import com.google.gson.stream.JsonToken
 import com.google.gson.stream.JsonWriter
 
-import edu.tjrac.swant.baselib.util.StringUtils
+import edu.tjrac.swant.baselib.util.SUtil
 
 /**
  * Created by wpc on 2018-12-27.
@@ -42,7 +42,7 @@ class FloatTypeAdapter : TypeAdapter<Float>() {
             }
             if (`in`.peek() == JsonToken.STRING) {
                 val str = `in`.nextString()
-                if (StringUtils.isDouble(str)) {
+                if (SUtil.isDouble(str)) {
                     return java.lang.Float.parseFloat(str)
                 } else {
                     Log.e("TypeAdapter", "$str is not a number")

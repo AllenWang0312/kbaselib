@@ -8,7 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.widget.TextView
 import edu.tjrac.swant.baselib.R
-import edu.tjrac.swant.baselib.util.StringUtils
+import edu.tjrac.swant.baselib.util.SUtil
 import edu.tjrac.swant.baselib.util.T
 
 /**
@@ -62,7 +62,7 @@ open class BaseFragmentActivity : FragmentActivity(), BaseView {
 //            prog = ProgressDialog(mContext)
             }
             var tv_progress = progress!!.findViewById<TextView>(R.id.tv_progress)
-            if (!StringUtils.isEmpty(text)) {
+            if (!SUtil.isEmpty(text)) {
                 tv_progress.visibility = View.VISIBLE
                 tv_progress.setText(text)
             } else {

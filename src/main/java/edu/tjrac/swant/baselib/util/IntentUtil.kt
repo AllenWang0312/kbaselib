@@ -1,5 +1,6 @@
 package edu.tjrac.swant.baselib.util
 
+import android.annotation.TargetApi
 import android.app.Activity
 import android.content.Context
 import android.content.Context.POWER_SERVICE
@@ -9,7 +10,6 @@ import android.os.Build
 import android.os.PowerManager
 import android.provider.MediaStore
 import android.provider.Settings
-import android.support.annotation.RequiresApi
 import java.io.File
 
 /**
@@ -23,7 +23,7 @@ import java.io.File
 
 class IntentUtil {
 
-    @RequiresApi(api = Build.VERSION_CODES.M)
+    @TargetApi(Build.VERSION_CODES.M)
     fun ignoreBatteryOptimization(activity: Activity) {
         val powerManager = activity.getSystemService(POWER_SERVICE) as PowerManager
         val hasIgnored = powerManager.isIgnoringBatteryOptimizations(activity.packageName)

@@ -98,7 +98,7 @@ object UiUtil {
     fun createEmpty(context: Context, resId: Int, hint: String): View {
         var empty = LayoutInflater.from(context).inflate(R.layout.empty, null)
         empty.findViewById<ImageView>(R.id.iv_empty).setImageResource(resId)
-        if (!StringUtils.isEmpty(hint)) {
+        if (!SUtil.isEmpty(hint)) {
             empty.findViewById<TextView>(R.id.tv_empty).text = hint
         }
         return empty

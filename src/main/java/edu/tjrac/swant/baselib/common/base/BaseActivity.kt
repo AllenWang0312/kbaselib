@@ -15,7 +15,7 @@ import android.widget.TextView
 import edu.tjrac.swant.baselib.BuildConfig
 import edu.tjrac.swant.baselib.R
 import edu.tjrac.swant.baselib.util.LeakUtil
-import edu.tjrac.swant.baselib.util.StringUtils
+import edu.tjrac.swant.baselib.util.SUtil
 import edu.tjrac.swant.baselib.util.T
 import edu.tjrac.swant.baselib.util.UiUtil
 
@@ -128,7 +128,7 @@ import edu.tjrac.swant.baselib.util.UiUtil
 //            prog = ProgressDialog(mContext)
             }
             var tv_progress = progress!!.findViewById<TextView>(R.id.tv_progress)
-            if (!StringUtils.isEmpty(text)) {
+            if (!SUtil.isEmpty(text)) {
                 tv_progress.visibility = View.VISIBLE
                 tv_progress.setText(text)
             } else {
