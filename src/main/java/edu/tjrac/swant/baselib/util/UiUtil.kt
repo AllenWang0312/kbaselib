@@ -8,6 +8,9 @@ import android.graphics.Canvas
 import android.graphics.Color
 import android.os.Build
 import android.os.Environment
+import android.support.design.internal.BottomNavigationItemView
+import android.support.design.internal.BottomNavigationMenuView
+import android.support.design.widget.BottomNavigationView
 import android.support.v7.view.menu.MenuPopupHelper
 import android.support.v7.widget.PopupMenu
 import android.util.Log
@@ -353,5 +356,23 @@ object UiUtil {
             frame.addView(image, (i % 3) * itemWidth + (i % 3 + 1) * padding, (i / 3) * itemWidth + (i / 3 + 1) * padding)
         }
         ll.addView(frame)
+    }
+
+    fun disableShiftMode(navigationView: BottomNavigationView) {
+        val menuView = navigationView.getChildAt(0) as BottomNavigationMenuView
+        try {
+            val shiftingMode = menuView.javaClass.getDeclaredField("mShiftingMode")
+            shiftingMode.isAccessible = true
+            shiftingMode.setBoolean(menuView, false)
+            shiftingMode.isAccessible = false
+
+            for (i in 0 until menuView.childCount) {
+                val itemView = menuView.getChildAt(i) as BottomNavigationItemView
+//                itemView.setShiftingMode(false)
+                itemView.setChecked(itemView.itemData.isChecked)
+            }
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
     }
 }

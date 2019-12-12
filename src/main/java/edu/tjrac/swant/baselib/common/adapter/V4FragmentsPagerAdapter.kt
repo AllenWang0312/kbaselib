@@ -46,5 +46,26 @@ class V4FragmentsPagerAdapter(fm: FragmentManager) : FragmentPagerAdapter(fm) {
             }
         }
     }
-
+    fun setUpWithRadioGroup(vp: ViewPager, g: RadioGroup,skip :Int) {
+        g.setOnCheckedChangeListener { group, checkedId ->
+            for (i in 0 until count) {
+                var position=i
+                if(i>=skip){
+                    position-=1
+                }
+                if (checkedId == group.getChildAt(i).id) {
+                    vp.setCurrentItem(position,false)
+                }
+            }
+        }
+    }
+//    fun setUpWithRadioButtons(vp: ViewPager, buttons: Array<RadioButton>) {
+//        g.setOnCheckedChangeListener { group, checkedId ->
+//            for (i in 0 until count) {
+//                if (checkedId == group.getChildAt(i).id) {
+//                    vp.setCurrentItem(i,false)
+//                }
+//            }
+//        }
+//    }
 }

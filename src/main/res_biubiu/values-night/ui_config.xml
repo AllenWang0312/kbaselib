@@ -27,7 +27,7 @@
     <color name="button_positive_color">#FF52A0</color>
     <color name="button_unable_color">#FB79B4</color>
 
-
+    <color name="icon_color">#8a8a8a</color>
     <color name="text_color_primary">#ffffff</color>//默认文字颜色
     <color name="text_color_summary">#696870</color>
     <color name="status_bar_color">@color/colorPrimaryDark</color>//夜间模式 文字颜色
@@ -90,19 +90,17 @@
     <dimen name="dialog_padding_vert">8dp</dimen>
 
 
-    <style name="home_foot_bar_style">//for radiobutton
-        <!--<item name="android:layout_width">wrap_content</item>-->
-        <!--<item name="android:layout_height">match_parent</item>-->
-        <!--<item name="android:layout_weight">1</item>-->
-
-        <item name="android:background">@null</item>
-        <item name="android:button">@null</item>
-        <item name="android:drawablePadding">2dp</item>
-        <item name="android:gravity">center</item>
-        <item name="android:paddingTop">4dp</item>
-        <item name="android:textColor">@drawable/tab_text_color_select</item>
-        <item name="android:textSize">12dp</item>
-    </style>
+<!--    <style name="home_foot_bar_style">//for radiobutton-->
+<!--        &lt;!&ndash;<item name="android:layout_width">wrap_content</item>&ndash;&gt;-->
+<!--        &lt;!&ndash;<item name="android:layout_height">match_parent</item>&ndash;&gt;-->
+<!--        &lt;!&ndash;<item name="android:layout_weight">1</item>&ndash;&gt;-->
+<!--        <item name="android:background">@null</item>-->
+<!--        <item name="android:button">@null</item>-->
+<!--        <item name="android:gravity">center</item>-->
+<!--        <item name="android:paddingTop">4dp</item>-->
+<!--        <item name="android:textColor">@drawable/tab_text_color_select</item>-->
+<!--        <item name="android:textSize">10dp</item>-->
+<!--    </style>-->
 
     <style name="button_positive_gradient_style">//positive 按钮 带渐变
         <item name="android:background">@drawable/shape_bt_pos_grad_bg</item>

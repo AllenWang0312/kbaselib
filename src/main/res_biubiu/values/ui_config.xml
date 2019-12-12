@@ -16,6 +16,7 @@
     <color name="button_positive_color">#FF52A0</color>
     <color name="button_unable_color">#FB79B4</color>
 
+    <color name="icon_color">#2c2c2c</color>
     <color name="text_color_primary">#000</color>//默认文字颜色
     <color name="text_color_summary">#696870</color>
     <color name="status_bar_color">@color/colorPrimaryDark</color>//夜间模式 文字颜色
@@ -94,11 +95,10 @@
 
         <item name="android:background">@null</item>
         <item name="android:button">@null</item>
-        <item name="android:drawablePadding">2dp</item>
         <item name="android:gravity">center</item>
         <item name="android:paddingTop">4dp</item>
         <item name="android:textColor">@drawable/tab_text_color_select</item>
-        <item name="android:textSize">12dp</item>
+        <item name="android:textSize">10dp</item>
     </style>
 
     <style name="button_positive_gradient_style">//positive 按钮 带渐变
