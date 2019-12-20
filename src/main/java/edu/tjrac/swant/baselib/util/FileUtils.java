@@ -6,11 +6,19 @@ import android.content.res.AssetManager;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Environment;
-import android.support.v4.content.FileProvider;
 
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
+
+import androidx.core.content.FileProvider;
 
 /**
  * Created by wpc on 2017/4/14.
@@ -353,6 +361,7 @@ public class FileUtils {
             {".mpga", "audio/mpeg"},
             {".msg", "application/vnd.ms-outlook"},
             {".ogg", "audio/ogg"},
+            {".md", "application/markdown"},
             {".pdf", "application/pdf"},
             {".png", "image/png"},
             {".pps", "application/vnd.ms-powerpoint"},

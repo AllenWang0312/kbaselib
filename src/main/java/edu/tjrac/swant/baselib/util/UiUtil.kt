@@ -8,11 +8,11 @@ import android.graphics.Canvas
 import android.graphics.Color
 import android.os.Build
 import android.os.Environment
-import android.support.design.internal.BottomNavigationItemView
-import android.support.design.internal.BottomNavigationMenuView
-import android.support.design.widget.BottomNavigationView
-import android.support.v7.view.menu.MenuPopupHelper
-import android.support.v7.widget.PopupMenu
+import com.google.android.material.bottomnavigation.BottomNavigationItemView
+import com.google.android.material.bottomnavigation.BottomNavigationMenuView
+import com.google.android.material.bottomnavigation.BottomNavigationView
+import androidx.appcompat.view.menu.MenuPopupHelper
+import androidx.appcompat.widget.PopupMenu
 import android.util.Log
 import android.util.TypedValue
 import android.view.LayoutInflater

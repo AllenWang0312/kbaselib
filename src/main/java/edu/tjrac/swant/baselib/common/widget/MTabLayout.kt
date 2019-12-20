@@ -2,7 +2,7 @@ package edu.tjrac.swant.baselib.common.widget
 
 import android.content.Context
 import android.graphics.Canvas
-import android.support.v4.view.ViewPager
+import androidx.viewpager.widget.ViewPager
 import android.widget.FrameLayout
 import edu.tjrac.swant.baselib.R
 

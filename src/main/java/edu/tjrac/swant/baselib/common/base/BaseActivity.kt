@@ -7,7 +7,7 @@ import android.content.pm.ActivityInfo
 import android.content.res.TypedArray
 import android.os.Build
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatActivity
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -42,7 +42,7 @@ import edu.tjrac.swant.baselib.util.UiUtil
         initStatusBar()
         setOrientation()
         BaseApplication.instance?.addActivity(this)
-        Log.d(this.javaClass.simpleName, "onCreate")
+//        Log.d(this.javaClass.simpleName, "onCreate")
     }
 
     protected fun setOrientation() {
@@ -81,7 +81,7 @@ import edu.tjrac.swant.baselib.util.UiUtil
     }
 
     override fun setTheme(resid: Int) {
-        Log.d(TAG,"setTheme")
+//        Log.d(TAG,"setTheme")
         super.setTheme(resid)
         themeId = resid
     }
@@ -158,9 +158,7 @@ import edu.tjrac.swant.baselib.util.UiUtil
                 e.printStackTrace()
             }
         }
-
-
-        Log.d(this.javaClass.simpleName, "onResume")
+//        Log.d(this.javaClass.simpleName, "onResume")
     }
 
     override fun onPause() {
@@ -174,8 +172,7 @@ import edu.tjrac.swant.baselib.util.UiUtil
                 e.printStackTrace()
             }
         }
-
-        Log.d(this.javaClass.simpleName, "onPause")
+//        Log.d(this.javaClass.simpleName, "onPause")
     }
 
 }

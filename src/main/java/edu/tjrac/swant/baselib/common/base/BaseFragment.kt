@@ -3,13 +3,13 @@ package edu.tjrac.swant.baselib.common.base
 import android.annotation.SuppressLint
 import android.app.Dialog
 import android.content.Context
-import android.support.v4.app.Fragment
 import android.util.Log
 import android.view.Gravity
 import android.view.LayoutInflater
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
+import androidx.fragment.app.Fragment
 import edu.tjrac.swant.baselib.R
 import edu.tjrac.swant.baselib.util.SUtil
 import edu.tjrac.swant.baselib.util.T
@@ -76,7 +76,7 @@ open class BaseFragment : Fragment(), BaseContextView {
         if (null != activity) {
             if (progress == null) {
                 var view = LayoutInflater.from(activity).inflate(R.layout.progress, null)
-                progress = Dialog(activity, R.style.default_dialog_style)
+                progress = Dialog(activity!!, R.style.default_dialog_style)
                 progress!!.setContentView(view)
 //            prog = ProgressDialog(mContext)
             }

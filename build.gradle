@@ -5,7 +5,8 @@ apply plugin: 'kotlin-android'
 
 
 android {
-    compileSdkVersion 27
+    compileSdkVersion compile_version
+    buildToolsVersion build_version
     sourceSets {
         main.res.srcDirs += 'src/main/res_ui'
         main.res.srcDirs += 'src/main/res_biubiu'
@@ -13,17 +14,23 @@ android {
         main.jniLibs.srcDirs = ['libs']
     }
     defaultConfig {
-        minSdkVersion 15
-        targetSdkVersion 27
+        minSdkVersion min_version
+        targetSdkVersion target_version
         versionCode 1
         versionName "1.0"
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
     buildTypes {
         release {
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            useProguard proguard
+            minifyEnabled proguard
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+        debug {
+            useProguard proguard
+            minifyEnabled proguard
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
 }
@@ -37,12 +44,14 @@ dependencies {
 //    api 'com.jaeger.statusbarutil:library:1.5.1'
     //    implementation 'com.android.support:recyclerview-v7:27.1.1'
     //    implementation 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.30'
-    api "com.android.support:support-v4:$androidSupportVersion"
-    api "com.android.support:design:$androidSupportVersion"
-    api "com.android.support:appcompat-v7:$androidSupportVersion"
-    api "com.android.support:support-annotations:$androidSupportVersion"
-    api "com.android.support:support-fragment:$androidSupportVersion"
-    api 'com.android.support.constraint:constraint-layout:1.1.3'
+    api 'androidx.legacy:legacy-support-v4:1.0.0'
+    api 'com.google.android.material:material:1.0.0'
+
+    api 'androidx.appcompat:appcompat:1.0.0'
+    api 'androidx.annotation:annotation:1.0.0'
+    api 'androidx.fragment:fragment:1.0.0'
+
+    api 'androidx.constraintlayout:constraintlayout:1.1.3'
 
     //    implementation 'com.android.support:cardview-v7:27.1.1'
     //    implementation 'com.android.support.constraint:constraint-layout:1.1.2'
@@ -59,14 +68,16 @@ dependencies {
     api 'io.reactivex:rxandroid:1.2.1'
     //    implementation 'io.reactivex.rxjava2:rxjava:2.1.8'
     //    implementation 'com.squareup.okhttp3:logging-interceptor:3.8.1'
+    api 'com.squareup.okhttp3:okhttp:3.8.1'
+    api 'com.squareup.okhttp3:logging-interceptor:3.8.1'
     //json解析
     api 'com.google.code.gson:gson:2.8.2'
     //image
     //    compile 'com.github.bumptech.glide:compiler:4.5.0'
     api "com.github.bumptech.glide:glide:$glide"
     annotationProcessor "com.github.bumptech.glide:compiler:$glide"
-    api 'com.squareup.okhttp3:okhttp:3.8.1'
-    api 'com.squareup.okhttp3:logging-interceptor:3.8.1'
+
+
 
 //    api 'com.uber.autodispose:autodispose:0.6.1'
 //    api 'com.uber.autodispose:autodispose-android-archcomponents:0.6.1'
