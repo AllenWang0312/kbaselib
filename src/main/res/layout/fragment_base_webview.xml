@@ -50,7 +50,7 @@
         android:layout_weight="1">
         <ProgressBar
             android:visibility="gone"
-            android:id="@+id/loading"
+            android:id="@+id/progress"
             style="?android:attr/progressBarStyleHorizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>

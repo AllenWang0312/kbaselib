@@ -62,7 +62,7 @@ class BaseWebViewFragment : BaseBarFragment {
         val view = inflater.inflate(getLayoutId(), container, false)
         setToolbar(view.findViewById(R.id.toolbar))
         webview = view.findViewById(R.id.webview)
-        prog = view.findViewById(R.id.loading)
+        prog = view.findViewById(R.id.progress)
         val settings = webview?.settings
         settings?.javaScriptEnabled = true
         //支持插件

@@ -6,7 +6,6 @@ import android.content.Context
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
-import androidx.fragment.app.FragmentActivity
 import android.util.Log
 import android.view.View
 import android.webkit.WebChromeClient
@@ -14,6 +13,7 @@ import android.webkit.WebSettings
 import android.webkit.WebView
 import android.webkit.WebViewClient
 import android.widget.ProgressBar
+import androidx.fragment.app.FragmentActivity
 import edu.tjrac.swant.baselib.R
 import edu.tjrac.swant.baselib.util.UiUtil
 
@@ -45,7 +45,7 @@ open class BaseWebViewActivity : BaseBarActivity() {
             finish()
             return
         }
-        setContentView(R.layout.activity_service_text)
+        setContentView(R.layout.fragment_base_webview)
         //        bindToolbar(R.id.toolbar_bg);
         //        R.drawable.anglered
         setToolbar(findViewById<View>(R.id.toolbar))
