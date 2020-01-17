@@ -1,5 +1,6 @@
 package edu.tjrac.swant.baselib.common.base
 
+import android.annotation.SuppressLint
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
@@ -15,10 +16,12 @@ import edu.tjrac.swant.baselib.R
 import edu.tjrac.swant.baselib.util.L
 
 /**
- * Created by wpc on 2020-01-15.
+ * Created by wpc on 2018/4/18.
  */
 
-open class BaseWebViewFragment : BaseFragment {
+//嵌入式的webview 和系统保持一致主题  放到 fragmentactivity使用
+@SuppressLint("ValidFragment")
+open class BaseToolbarWebViewFragment : BaseBarFragment {
 
     var tital: String? = null
     var url: String? = null
@@ -58,6 +61,7 @@ open class BaseWebViewFragment : BaseFragment {
     var v: View? = null
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         v = inflater.inflate(getLayoutId(), container, false)
+        setToolbar(v?.findViewById(R.id.toolbar)!!)
         webview = v?.findViewById(R.id.webview)
         prog = v?.findViewById(R.id.progress)
         val settings = webview?.settings
@@ -112,6 +116,7 @@ open class BaseWebViewFragment : BaseFragment {
                     prog?.visibility = View.GONE
                     if (tital == null) {
                         Log.i("onProgressChanged", webview?.title)
+                        setTitle(webview?.title!!)
                     }
                     //                    setTital(web.getTital());
                 } else {
@@ -133,9 +138,13 @@ open class BaseWebViewFragment : BaseFragment {
         return v
     }
 
-    fun withWebViewClient(client: WebViewClient): BaseWebViewFragment {//自定义拦截操作
+    fun withWebViewClient(client: WebViewClient): BaseToolbarWebViewFragment {//自定义拦截操作
         this.client = client
         return this
+    }
+
+    fun withOptions(res_id: Int, click: View.OnClickListener) {
+        setRightIcon(res_id, click)
     }
 
     override fun onBack() {
@@ -146,9 +155,18 @@ open class BaseWebViewFragment : BaseFragment {
         }
     }
 
+    override fun setToolbar(view: View) {
+        super.setToolbar(view)
+        if (tital != null) {
+            setTitle(tital!!)
+        }
+        enableBackIcon()
+    }
+
     fun refeshData() {
         if (url != null) {
             L.i("refreshDataa", url!!)
+            setTitle(url!!)
             webview?.loadUrl(url)
         } else {
             if (content != null) {

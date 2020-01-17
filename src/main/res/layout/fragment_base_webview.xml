@@ -45,15 +45,17 @@
 
     <!--</RelativeLayout>-->
     <FrameLayout
+        android:id="@+id/fl_web"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1">
+
         <ProgressBar
-            android:visibility="gone"
             android:id="@+id/progress"
             style="?android:attr/progressBarStyleHorizontal"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:visibility="gone" />
 
         <WebView
             android:id="@+id/webview"
