@@ -49,7 +49,7 @@ abstract class BaseNet {
                 if (null === sOkHttpClient) {
                     sOkHttpClient = OkHttpClient.Builder()
                             .cache(cache)
-                            .connectTimeout(10,TimeUnit.SECONDS)
+                            .connectTimeout(10, TimeUnit.SECONDS)
                             .readTimeout(60, TimeUnit.SECONDS)
                             .writeTimeout(60, TimeUnit.SECONDS)
                             .addInterceptor(getInterceptor())
@@ -63,7 +63,7 @@ abstract class BaseNet {
     /**
      * 设置公共参数
      */
- open   fun getInterceptor(): Interceptor {
+    open fun getInterceptor(): Interceptor {
         return Interceptor { chain ->
             val originalRequest = chain.request()
             val request: Request
