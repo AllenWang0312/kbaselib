@@ -6,6 +6,7 @@ import android.content.res.AssetManager;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Environment;
+import android.util.Log;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -144,10 +145,13 @@ public class FileUtils {
 
     public static String getExtSDCardAPPDataPath(Context context) {
         File file = context.getCacheDir();
+
         if (!file.exists()) {
             file.mkdirs();
         }
-        return file.getAbsolutePath();
+        String path=file.getAbsolutePath();
+        Log.i("cache dir",path);
+        return path;
     }
 
 

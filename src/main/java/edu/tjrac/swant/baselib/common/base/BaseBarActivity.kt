@@ -35,56 +35,56 @@ abstract class BaseBarActivity : BaseActivity() {
     }
 
     override fun setTitle(t: CharSequence?) {
-        taiter!!.visibility = View.VISIBLE
-        taiter!!.text = t
+        taiter?.visibility = View.VISIBLE
+        taiter?.text = t
     }
 
     fun setTitle(t: CharSequence?, colorId: Int) {
-        taiter!!.visibility = View.VISIBLE
-        taiter!!.setTextColor(resources.getColor(colorId))
-        taiter!!.text = t
+        taiter?.visibility = View.VISIBLE
+        taiter?.setTextColor(resources.getColor(colorId))
+        taiter?.text = t
     }
 
     fun setLeftIcon(id: Int, click: View.OnClickListener) {
-        iv_left!!.visibility = View.VISIBLE
-        iv_left!!.setImageResource(id)
-        iv_left!!.setOnClickListener(click)
+        iv_left?.visibility = View.VISIBLE
+        iv_left?.setImageResource(id)
+        iv_left?.setOnClickListener(click)
     }
 
     fun setLeftIcon2(id: Int, click: View.OnClickListener) {
-        iv_left2!!.visibility = View.VISIBLE
-        iv_left2!!.setImageResource(id)
-        iv_left2!!.setOnClickListener(click)
+        iv_left2?.visibility = View.VISIBLE
+        iv_left2?.setImageResource(id)
+        iv_left2?.setOnClickListener(click)
     }
 
     fun setRightIcon(id: Int, click: View.OnClickListener) {
-        iv_right!!.visibility = View.VISIBLE
-        iv_right!!.setImageResource(id)
-        iv_right!!.setOnClickListener(click)
+        iv_right?.visibility = View.VISIBLE
+        iv_right?.setImageResource(id)
+        iv_right?.setOnClickListener(click)
     }
 
     fun setLeftText(text: String, click: View.OnClickListener) {
-        tv_left!!.visibility = View.VISIBLE
-        tv_left!!.text = text
-        tv_left!!.setOnClickListener(click)
+        tv_left?.visibility = View.VISIBLE
+        tv_left?.text = text
+        tv_left?.setOnClickListener(click)
     }
 
     fun setRightText(text: String, click: View.OnClickListener) {
-        tv_right!!.visibility = View.VISIBLE
-        tv_right!!.text = text
-        tv_right!!.setOnClickListener(click)
+        tv_right?.visibility = View.VISIBLE
+        tv_right?.text = text
+        tv_right?.setOnClickListener(click)
     }
 
     fun setRightText(text: String, colorId: Int, click: View.OnClickListener) {
-        tv_right!!.visibility = View.VISIBLE
-        tv_right!!.setTextColor(resources.getColor(colorId))
+        tv_right?.visibility = View.VISIBLE
+        tv_right?.setTextColor(resources.getColor(colorId))
         this.setRightText(text, click)
     }
 
     fun setRightIcon2(id: Int, click: View.OnClickListener) {
-        iv_right2!!.visibility = View.VISIBLE
-        iv_right2!!.setImageResource(id)
-        iv_right2!!.setOnClickListener(click)
+        iv_right2?.visibility = View.VISIBLE
+        iv_right2?.setImageResource(id)
+        iv_right2?.setOnClickListener(click)
     }
 
     fun enableBackIcon() {
@@ -93,7 +93,7 @@ abstract class BaseBarActivity : BaseActivity() {
 
     fun enableBackIcon(red_id: Int) {
         this.setLeftIcon(red_id,View.OnClickListener { _ ->
-            iv_left!!.visibility = View.VISIBLE
+            iv_left?.visibility = View.VISIBLE
             onBackPressed()
         })
     }
