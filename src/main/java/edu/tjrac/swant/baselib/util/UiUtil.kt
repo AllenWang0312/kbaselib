@@ -22,7 +22,6 @@ import android.widget.FrameLayout
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
-import com.bumptech.glide.Glide
 import edu.tjrac.swant.baselib.R
 import java.io.File
 import java.io.FileInputStream
@@ -342,21 +341,21 @@ object UiUtil {
         view.visibility = if (visiable) View.VISIBLE else View.GONE
     }
 
-    fun inflateGallery(context: Context, ll: LinearLayout?, padding: Int, images: ArrayList<String>) {
-        var width = ll?.width!!
-        var itemWidth = (width - padding * 4) / 3
-
-        var frame = FrameLayout(context)
-        frame.layoutParams = LinearLayout.LayoutParams(width, width)
-        for (i in 0 until images.size) {
-            var url = images.get(i)
-            var image = ImageView(context)
-            image.layoutParams = FrameLayout.LayoutParams(itemWidth, itemWidth)
-            Glide.with(context).load(url).into(image)
-            frame.addView(image, (i % 3) * itemWidth + (i % 3 + 1) * padding, (i / 3) * itemWidth + (i / 3 + 1) * padding)
-        }
-        ll.addView(frame)
-    }
+//    fun inflateGallery(context: Context, ll: LinearLayout?, padding: Int, images: ArrayList<String>) {
+//        var width = ll?.width!!
+//        var itemWidth = (width - padding * 4) / 3
+//
+//        var frame = FrameLayout(context)
+//        frame.layoutParams = LinearLayout.LayoutParams(width, width)
+//        for (i in 0 until images.size) {
+//            var url = images.get(i)
+//            var image = ImageView(context)
+//            image.layoutParams = FrameLayout.LayoutParams(itemWidth, itemWidth)
+//            Glide.with(context).load(url).into(image)
+//            frame.addView(image, (i % 3) * itemWidth + (i % 3 + 1) * padding, (i / 3) * itemWidth + (i / 3 + 1) * padding)
+//        }
+//        ll.addView(frame)
+//    }
 
     fun disableShiftMode(navigationView: BottomNavigationView) {
         val menuView = navigationView.getChildAt(0) as BottomNavigationMenuView
