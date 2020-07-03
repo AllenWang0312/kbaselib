@@ -27,6 +27,22 @@ import androidx.core.content.FileProvider;
  */
 
 public class FileUtils {
+    //    内置sd卡路径
+//    String sdcardPath = System.getenv("EXTERNAL_STORAGE");
+//    内置sd卡路径
+//    String sdcardPath = Environment.getExternalStorageDirectory().getAbsolutePath();
+//    var ExtSDCardPath: String? = null
+//    get() {
+//        if (field == null) {
+//            field = System.getenv("SECONDARY_STORAGE")
+//        }
+//        return field
+//    }
+    public static String getSDcardPath() {
+//        Environment.getDownloadCacheDirectory().getAbsolutePath()
+        return Environment.getExternalStorageDirectory().getPath();
+    }
+
 
     public static void openFile(Context context, File file) {
         Intent intent = new Intent();

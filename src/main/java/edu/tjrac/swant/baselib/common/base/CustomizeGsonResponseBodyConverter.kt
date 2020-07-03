@@ -21,7 +21,7 @@ class CustomizeGsonResponseBodyConverter<T> internal constructor(private val gso
         if(null!=response&& response.isNotEmpty()){
             if (BuildConfig.DEBUG) {
                 //打印后台数据
-                Log.e(BuildConfig.APPLICATION_ID, response)
+                Log.e(BuildConfig.LIBRARY_PACKAGE_NAME, response)
             }
             try {
                 return adapter.fromJson(response)
