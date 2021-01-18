@@ -7,7 +7,7 @@ import android.os.Bundle
  * Created by wpc on 2018-09-03.
  */
 
-abstract class BaseH5Activity<out T : H5InterfaceBean> : BaseWebViewActivity() {
+abstract class BaseH5Activity< T : H5InterfaceBean> : BaseWebViewActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -19,5 +19,5 @@ abstract class BaseH5Activity<out T : H5InterfaceBean> : BaseWebViewActivity() {
         webView.addJavascriptInterface(getH5Interface(), getH5Interface().toString())
     }
 
-    abstract fun getH5Interface(): T?
+    abstract fun getH5Interface(): T
 }

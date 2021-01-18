@@ -132,10 +132,10 @@ open class BaseWebViewActivity : BaseBarActivity() {
 
     private fun initDate() {
         if (url != null) {
-            webView.loadUrl(url)
+            webView.loadUrl(url!!)
         } else {
             if (content != null) {
-                webView.loadData(content, "head_chose_file/html", "UTF-8")
+                webView.loadData(content!!, "head_chose_file/html", "UTF-8")
             }
         }
     }

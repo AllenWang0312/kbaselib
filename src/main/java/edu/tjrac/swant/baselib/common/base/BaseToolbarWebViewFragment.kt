@@ -107,7 +107,7 @@ open class BaseToolbarWebViewFragment : BaseBarFragment {
 
             }
         }
-        webview?.webViewClient = client
+        webview?.webViewClient = client!!
 
         webview?.webChromeClient = object : WebChromeClient() {
             override fun onProgressChanged(view: WebView, newProgress: Int) {
@@ -115,7 +115,7 @@ open class BaseToolbarWebViewFragment : BaseBarFragment {
                 if (newProgress == 100) {
                     prog?.visibility = View.GONE
                     if (tital == null) {
-                        Log.i("onProgressChanged", webview?.title)
+                        Log.i("onProgressChanged", webview?.title!!)
                         setTitle(webview?.title!!)
                     }
                     //                    setTital(web.getTital());
@@ -167,10 +167,10 @@ open class BaseToolbarWebViewFragment : BaseBarFragment {
         if (url != null) {
             L.i("refreshDataa", url!!)
             setTitle(url!!)
-            webview?.loadUrl(url)
+            webview?.loadUrl(url!!)
         } else {
             if (content != null) {
-                webview?.loadData(content, "text/html", "UTF-8")
+                webview?.loadData(content!!, "text/html", "UTF-8")
             }
         }
 
