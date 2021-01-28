@@ -8,9 +8,6 @@ import android.graphics.Canvas
 import android.graphics.Color
 import android.os.Build
 import android.os.Environment
-import com.google.android.material.bottomnavigation.BottomNavigationItemView
-import com.google.android.material.bottomnavigation.BottomNavigationMenuView
-import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.view.menu.MenuPopupHelper
 import androidx.appcompat.widget.PopupMenu
 import android.util.Log
@@ -357,21 +354,21 @@ object UiUtil {
 //        ll.addView(frame)
 //    }
 
-    fun disableShiftMode(navigationView: BottomNavigationView) {
-        val menuView = navigationView.getChildAt(0) as BottomNavigationMenuView
-        try {
-            val shiftingMode = menuView.javaClass.getDeclaredField("mShiftingMode")
-            shiftingMode.isAccessible = true
-            shiftingMode.setBoolean(menuView, false)
-            shiftingMode.isAccessible = false
-
-            for (i in 0 until menuView.childCount) {
-                val itemView = menuView.getChildAt(i) as BottomNavigationItemView
-//                itemView.setShiftingMode(false)
-                itemView.setChecked(itemView.itemData.isChecked)
-            }
-        } catch (e: Exception) {
-            e.printStackTrace()
-        }
-    }
+//    fun disableShiftMode(navigationView: BottomNavigationView) {
+//        val menuView = navigationView.getChildAt(0) as BottomNavigationMenuView
+//        try {
+//            val shiftingMode = menuView.javaClass.getDeclaredField("mShiftingMode")
+//            shiftingMode.isAccessible = true
+//            shiftingMode.setBoolean(menuView, false)
+//            shiftingMode.isAccessible = false
+//
+//            for (i in 0 until menuView.childCount) {
+//                val itemView = menuView.getChildAt(i) as BottomNavigationItemView
+////                itemView.setShiftingMode(false)
+//                itemView.setChecked(itemView.itemData.isChecked)
+//            }
+//        } catch (e: Exception) {
+//            e.printStackTrace()
+//        }
+//    }
 }

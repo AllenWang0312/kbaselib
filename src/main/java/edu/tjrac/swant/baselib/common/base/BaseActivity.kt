@@ -122,12 +122,12 @@ import edu.tjrac.swant.baselib.util.UiUtil
     override fun showProgressDialog(text: String) {
         if (null != mContext) {
             if (progress == null) {
-                var view = LayoutInflater.from(mContext).inflate(R.layout.progress, null)
+                val view = LayoutInflater.from(mContext).inflate(R.layout.progress, null)
                 progress = Dialog(mContext, R.style.default_dialog_style)
                 progress!!.setContentView(view)
 //            prog = ProgressDialog(mContext)
             }
-            var tv_progress = progress!!.findViewById<TextView>(R.id.tv_progress)
+            val tv_progress = progress!!.findViewById<TextView>(R.id.tv_progress)
             if (!SUtil.isEmpty(text)) {
                 tv_progress.visibility = View.VISIBLE
                 tv_progress.setText(text)
