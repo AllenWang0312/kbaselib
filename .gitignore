@@ -2,7 +2,7 @@
 *.pro
 *.properties
 *.bat
-/com
+/edu
 /build
 */.idea
 
