@@ -8,6 +8,7 @@ buildscript{
         gson = '2.8.2'
     }
     dependencies{
+        classpath 'com.android.tools.build:gradle:5.3'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
         classpath "org.jetbrains.kotlin:kotlin-android-extensions:$kotlin_version"
     }
