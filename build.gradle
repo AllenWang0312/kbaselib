@@ -7,6 +7,10 @@ buildscript{
         ktx = '1.3.2'
         gson = '2.8.2'
     }
+    dependencies{
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+        classpath "org.jetbrains.kotlin:kotlin-android-extensions:$kotlin_version"
+    }
 }
 
 apply plugin: 'com.android.library'
@@ -57,14 +61,8 @@ dependencies {
 
 //    api 'com.jaeger.statusbarutil:library:1.5.1'
 
-    api "androidx.core:core-ktx:$ktx"
+    api "androidx.core:core-ktx:$ktx"//注解序列化
     api "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
-
-
-
-
-
-
 
     api 'com.squareup.retrofit2:adapter-rxjava:2.3.0'
     api 'com.squareup.retrofit2:converter-gson:2.3.0'
