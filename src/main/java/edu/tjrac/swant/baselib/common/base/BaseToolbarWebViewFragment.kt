@@ -151,7 +151,7 @@ open class BaseToolbarWebViewFragment : BaseBarFragment {
         if (webview?.canGoBack()!!) {
             webview?.goBack()
         } else {
-            activity!!.onBackPressed()
+            requireActivity().onBackPressed()
         }
     }
 

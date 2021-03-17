@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
+import edu.tjrac.swant.baselib.BuildConfig
 import edu.tjrac.swant.baselib.R
 import edu.tjrac.swant.baselib.common.base.BaseApplication
 
@@ -18,7 +19,11 @@ import edu.tjrac.swant.baselib.common.base.BaseApplication
 open class T {
     companion object {
         val duration = Toast.LENGTH_SHORT
-
+        fun debug( str: CharSequence) {
+            if (BuildConfig.DEBUG) {
+                show(str)
+            }
+        }
         fun show(str: CharSequence) {
             val t = Toast.makeText(BaseApplication.instance, str, duration)
             t.setGravity(Gravity.CENTER, 0, 0)

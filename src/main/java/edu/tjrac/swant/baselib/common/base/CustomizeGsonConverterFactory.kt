@@ -18,6 +18,16 @@ import retrofit2.Retrofit
 /**
  * Created by wpc on 2018-12-27.
  */
+fun createGson(): Gson {
+    return GsonBuilder()
+        .registerTypeAdapter(Int::class.javaPrimitiveType, IntegerTypeAdapter())
+        .registerTypeAdapter(Int::class.java, IntegerTypeAdapter())
+        .registerTypeAdapter(String::class.java, StringTypeAdapter())
+        .registerTypeAdapter(Float::class.javaPrimitiveType, FloatTypeAdapter())
+        .registerTypeAdapter(Float::class.java, FloatTypeAdapter())
+        .create()
+}
+
 
 class CustomizeGsonConverterFactory private constructor(private val gson: Gson) : Converter.Factory() {
 
@@ -39,20 +49,11 @@ class CustomizeGsonConverterFactory private constructor(private val gson: Gson) 
 
     companion object {
 
-        fun createGson(): Gson {
-            return GsonBuilder()
-                    .registerTypeAdapter(Int::class.javaPrimitiveType, IntegerTypeAdapter())
-                    .registerTypeAdapter(Int::class.java, IntegerTypeAdapter())
-                    .registerTypeAdapter(String::class.java, StringTypeAdapter())
-                    .registerTypeAdapter(Float::class.javaPrimitiveType, FloatTypeAdapter())
-                    .registerTypeAdapter(Float::class.java, FloatTypeAdapter())
-                    .create()
-        }
-
         @JvmOverloads
         fun create(gson: Gson = createGson()): CustomizeGsonConverterFactory {
             return CustomizeGsonConverterFactory(gson)
         }
+
     }
 
 }

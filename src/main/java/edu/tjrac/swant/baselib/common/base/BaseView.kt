@@ -17,7 +17,8 @@ interface BaseView {
     fun dismissInfoDialog()
 
     fun showProgressDialog()
-    fun showProgressDialog(text:String)
+    fun showProgressDialog(cancleable: Boolean)
+    fun showProgressDialog(text:String,cancleable:Boolean)
     fun dismissProgressDialog()
 
 

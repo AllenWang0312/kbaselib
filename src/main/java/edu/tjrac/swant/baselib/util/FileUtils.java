@@ -8,6 +8,8 @@ import android.os.Build;
 import android.os.Environment;
 import android.util.Log;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
@@ -38,11 +40,42 @@ public class FileUtils {
 //        }
 //        return field
 //    }
+
+    @NotNull
+    public static Uri parUri(Context context, File cameraFile) {
+        Uri imageUri;
+        String authority = context.getPackageName() + ".provider";
+        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.M) {
+            //通过FileProvider创建一个content类型的Uri
+            imageUri = FileProvider.getUriForFile(context, authority, cameraFile);
+        } else {
+            imageUri = Uri.fromFile(cameraFile);
+        }
+        return imageUri;
+    }
+
     public static String getSDcardPath() {
 //        Environment.getDownloadCacheDirectory().getAbsolutePath()
         return Environment.getExternalStorageDirectory().getPath();
     }
-
+    /**
+     * 获取拍摄的头像照片路径
+     *
+     * @param context
+     * @return
+     */
+    public static File getExternalPhotoCacheDir(Context context) {
+        //File dataDir = new File(new File(Environment.getExternalStorageDirectory(), "Android"), "data");
+        File dataDir = new File(new File(Environment.getExternalStorageDirectory(), "Android"), "data");
+        File appCacheDir = new File(new File(dataDir, context.getPackageName()), "photoCache");
+        if (!appCacheDir.exists()) {
+            if (!appCacheDir.mkdirs()) {
+//                KLog.e("Unable to create external cache directory");
+                return null;
+            }
+        }
+        return appCacheDir;
+    }
 
     public static void openFile(Context context, File file) {
         Intent intent = new Intent();
@@ -119,7 +152,7 @@ public class FileUtils {
 //    }
 
 
-    static String getSizeString(long size) {
+   public static String getSizeString(long size) {
         if (size / 1000 / 1000 / 1000f > 1) {
             return size / 1000 / 1000 / 1000f + "G";
         } else {

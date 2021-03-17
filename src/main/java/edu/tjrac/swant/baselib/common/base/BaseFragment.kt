@@ -35,7 +35,7 @@ open class BaseFragment : Fragment(), BaseContextView {
     }
 
     override fun getContext(): Context {
-        return activity!!
+        return requireActivity()
     }
 
     override fun showToast(msg: String) {
@@ -69,14 +69,17 @@ open class BaseFragment : Fragment(), BaseContextView {
 
     var progress: Dialog? = null
     override fun showProgressDialog() {
-        showProgressDialog("")
+        showProgressDialog("",true)
+    }
+    override fun showProgressDialog(cancelable: Boolean) {
+        showProgressDialog("",cancelable)
     }
 
-    override fun showProgressDialog(text: String) {
+    override fun showProgressDialog(text: String,cancelable:Boolean) {
         if (null != activity) {
             if (progress == null) {
-                var view = LayoutInflater.from(activity).inflate(R.layout.progress, null)
-                progress = Dialog(activity!!, R.style.default_dialog_style)
+                val view = LayoutInflater.from(activity).inflate(R.layout.progress, null)
+                progress = Dialog(context, R.style.default_dialog_style)
                 progress!!.setContentView(view)
 //            prog = ProgressDialog(mContext)
             }
@@ -85,6 +88,7 @@ open class BaseFragment : Fragment(), BaseContextView {
             } else {
                 progress!!.findViewById<TextView>(R.id.tv_progress).setText("")
             }
+            progress?.setCancelable(cancelable)
             progress!!.show()
         }
     }

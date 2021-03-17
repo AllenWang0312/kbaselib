@@ -13,7 +13,7 @@ abstract class BaseApplication : Application() {
 
     override fun onCreate() {
         super.onCreate()
-        instance=this
+        instance = this
     }
 
     fun addActivity(activity: BaseActivity) {
@@ -27,18 +27,17 @@ abstract class BaseApplication : Application() {
         activitys?.remove(activity)
     }
 
-    fun exit() {
-        for (item in activitys!!) {
-            item?.finish()
-        }
-        activitys!!.clear()
-    }
-
+//    fun exit() {
+//        for (item in activitys!!) {
+//            item?.finish()
+//        }
+//        activitys!!.clear()
+//    }
 
 
     companion object {
 
-        public  var instance: BaseApplication? = null
+        public lateinit var instance: BaseApplication
             set
     }
 

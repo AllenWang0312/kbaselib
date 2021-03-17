@@ -142,7 +142,7 @@ open class BaseWebViewFragment : BaseFragment {
         if (webview?.canGoBack()!!) {
             webview?.goBack()
         } else {
-            activity!!.onBackPressed()
+            requireActivity().onBackPressed()
         }
     }
 

@@ -5,6 +5,7 @@ import android.app.Activity
 import android.content.Context
 import android.content.Context.POWER_SERVICE
 import android.content.Intent
+import android.graphics.Bitmap
 import android.net.Uri
 import android.os.Build
 import android.os.PowerManager
@@ -49,7 +50,51 @@ class IntentUtil {
         context.startActivityForResult(intent, PHOTO_REQUEST_GALLERY)
     }
 
+
     companion object {
+        /**
+         * 跳转应用设置页
+         * @param context
+         */
+        fun toSelfSetting(context: Context) {
+            val mIntent = Intent()
+            mIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+            if (Build.VERSION.SDK_INT >= 9) {
+                mIntent.action = "android.settings.APPLICATION_DETAILS_SETTINGS"
+                mIntent.data = Uri.fromParts("package", context.packageName, null)
+            } else if (Build.VERSION.SDK_INT <= 8) {
+                mIntent.action = Intent.ACTION_VIEW
+                mIntent.setClassName("com.android.settings", "com.android.setting.InstalledAppDetails")
+                mIntent.putExtra("com.android.settings.ApplicationPkgName", context.packageName)
+            }
+            context.startActivity(mIntent)
+        }
+        fun startPhotoZoom(sUri: Uri?, dUri: Uri?, outputX: Int, outputY: Int): Intent {
+            if (sUri == null) {
+                //            KLog.i("tag", "The uri is not exist.");
+                return Intent()
+            }
+            val intent = Intent("com.android.camera.action.CROP")
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
+                intent.addFlags(Intent.FLAG_GRANT_WRITE_URI_PERMISSION)
+            }
+            intent.setDataAndType(sUri, "image/*")
+            // 设置裁剪
+            intent.putExtra("crop", "true")
+            // aspectX aspectY 是宽高的比例
+            intent.putExtra("aspectX", outputX)
+            intent.putExtra("aspectY", outputY)
+            // outputX outputY 是裁剪图片宽高
+            intent.putExtra("outputX", 300)
+            intent.putExtra("outputY", 300)
+            // intent.putExtra("return-data", true);
+            intent.putExtra("return-data", false)
+            intent.putExtra(MediaStore.EXTRA_OUTPUT, dUri)
+            intent.putExtra("outputFormat", Bitmap.CompressFormat.JPEG.toString())
+            intent.putExtra("noFaceDetection", true)
+            return intent
+        }
         /**
          * 打开文件
          *

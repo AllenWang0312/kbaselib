@@ -24,7 +24,7 @@ import edu.tjrac.swant.baselib.util.UiUtil
  * Created by wpc on 2018-08-02.
  */
 
- abstract class BaseActivity : AppCompatActivity(), BaseContextView {
+abstract class BaseActivity : AppCompatActivity(), BaseContextView {
 
     override fun getContext(): Context {
         return mContext
@@ -42,14 +42,14 @@ import edu.tjrac.swant.baselib.util.UiUtil
         initStatusBar()
         setOrientation()
         BaseApplication.instance?.addActivity(this)
-//        Log.d(this.javaClass.simpleName, "onCreate")
+        //        Log.d(this.javaClass.simpleName, "onCreate")
     }
 
     protected fun setOrientation() {
         if (Build.VERSION.SDK_INT == Build.VERSION_CODES.O) {
             return
         }
-        if (isTranslucentOrFloating()) {//android 8.0 透明activity 不能设置方向
+        if (isTranslucentOrFloating()) { //android 8.0 透明activity 不能设置方向
             requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED          //跟随父activity
         } else {
             requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT          //竖屏
@@ -59,7 +59,8 @@ import edu.tjrac.swant.baselib.util.UiUtil
     private fun isTranslucentOrFloating(): Boolean {
         var isTranslucentOrFloating = false
         try {
-            val styleableRes = Class.forName("com.android.internal.R\$styleable").getField("Window").get(null) as IntArray
+            val styleableRes = Class.forName("com.android.internal.R\$styleable").getField("Window")
+                .get(null) as IntArray
             val ta = obtainStyledAttributes(styleableRes)
             val m = ActivityInfo::class.java.getMethod("isTranslucentOrFloating", TypedArray::class.java)
             m.isAccessible = true
@@ -81,14 +82,14 @@ import edu.tjrac.swant.baselib.util.UiUtil
     }
 
     override fun setTheme(resid: Int) {
-//        Log.d(TAG,"setTheme")
+        //        Log.d(TAG,"setTheme")
         super.setTheme(resid)
         themeId = resid
     }
 
-//    override fun setTitle(title: CharSequence?) {
-//        super.setTitle(title)
-//    }
+    //    override fun setTitle(title: CharSequence?) {
+    //        super.setTitle(title)
+    //    }
 
     //baseview
     override fun showToast(msg: String) {
@@ -116,16 +117,20 @@ import edu.tjrac.swant.baselib.util.UiUtil
     }
 
     override fun showProgressDialog() {
-        showProgressDialog("")
+        showProgressDialog("", true)
     }
 
-    override fun showProgressDialog(text: String) {
+    override fun showProgressDialog(cancelable: Boolean) {
+        showProgressDialog("", cancelable)
+    }
+
+    override fun showProgressDialog(text: String, cancelable: Boolean) {
         if (null != mContext) {
             if (progress == null) {
                 val view = LayoutInflater.from(mContext).inflate(R.layout.progress, null)
                 progress = Dialog(mContext, R.style.default_dialog_style)
                 progress!!.setContentView(view)
-//            prog = ProgressDialog(mContext)
+                //            prog = ProgressDialog(mContext)
             }
             val tv_progress = progress!!.findViewById<TextView>(R.id.tv_progress)
             if (!SUtil.isEmpty(text)) {
@@ -158,7 +163,7 @@ import edu.tjrac.swant.baselib.util.UiUtil
                 e.printStackTrace()
             }
         }
-//        Log.d(this.javaClass.simpleName, "onResume")
+        //        Log.d(this.javaClass.simpleName, "onResume")
     }
 
     override fun onPause() {
@@ -172,7 +177,7 @@ import edu.tjrac.swant.baselib.util.UiUtil
                 e.printStackTrace()
             }
         }
-//        Log.d(this.javaClass.simpleName, "onPause")
+        //        Log.d(this.javaClass.simpleName, "onPause")
     }
 
 }

@@ -2,35 +2,83 @@ package edu.tjrac.swant.baselib.util
 
 import android.annotation.SuppressLint
 import android.app.Activity
+import android.app.Dialog
 import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.Canvas
 import android.graphics.Color
 import android.os.Build
 import android.os.Environment
+import android.text.InputFilter
+import android.text.Spanned
 import androidx.appcompat.view.menu.MenuPopupHelper
 import androidx.appcompat.widget.PopupMenu
 import android.util.Log
 import android.util.TypedValue
-import android.view.LayoutInflater
-import android.view.View
-import android.view.WindowManager
-import android.widget.FrameLayout
-import android.widget.ImageView
-import android.widget.LinearLayout
-import android.widget.TextView
+import android.view.*
+import android.widget.*
 import edu.tjrac.swant.baselib.R
 import java.io.File
 import java.io.FileInputStream
 import java.io.FileOutputStream
 import java.io.IOException
 import java.util.*
+import java.util.regex.Pattern
 
 /**
  * Created by wpc on 2018-08-02.
  */
 
 object UiUtil {
+
+
+    fun getGridItemWidth(context: Context, red: Int, exc: Int): Int {
+        val width = getScreenWidth(context)
+
+        return ((width - dp2px(context, red)) / exc).toInt()
+
+    }
+    fun showAnimiToast(parent: ViewGroup?, toast: String, drawableleft: Int, backcolor: Int, waitseconds: Int) {
+//        var layoutInflater = LayoutInflater.from(parent?.context)
+        //        var text=layoutInflater.inflate(R.layout.text_toast,null) as TextView
+        val context = parent?.context
+        val text = TextView(context)
+        text.layoutParams = FrameLayout.LayoutParams(FrameLayout.LayoutParams.MATCH_PARENT, UiUtil.dp2px(context!!, 36)
+            .toInt())
+        text.setText(toast)
+        text.gravity = Gravity.CENTER
+        text.setCompoundDrawables(context?.resources?.getDrawable(drawableleft), null, null, null)
+        text.setTextColor(context?.resources?.getColor(R.color.white)!!)
+        text.setBackgroundColor(context?.resources?.getColor(backcolor)!!)
+        parent?.addView(text)
+        //        parent?.invalidate()
+        parent?.postDelayed(Runnable {
+            Log.i("uiutil", "showAnimiToast")
+            text.animate().translationY(-(text.height.toFloat()))
+        }, waitseconds * 1000L)
+    }
+    fun bottomDialog(dialog: Dialog?) {
+        val window = dialog?.getWindow()
+        window?.setGravity(Gravity.BOTTOM)
+        val params = window?.getAttributes()
+        params?.width = WindowManager.LayoutParams.MATCH_PARENT
+        params?.height = WindowManager.LayoutParams.WRAP_CONTENT
+        window?.setAttributes(params)
+    }
+    fun setEditTextInhibitInputSpeChat(editText: EditText) {
+
+        val filter = object : InputFilter {
+            override fun filter(source: CharSequence?, start: Int, end: Int, dest: Spanned?, dstart: Int, dend: Int): CharSequence? {
+                val speChat = "[`~!@#$%^&*()+=|{}':;',\\[\\].<>/?~！@#￥%……&*（）——+|{}【】‘；：”“’。，、？]"
+                val pattern = Pattern.compile(speChat)
+                val matcher = pattern.matcher(source.toString())
+                return if (matcher.find()) ""
+                else null
+            }
+        }
+        editText.filters = arrayOf<InputFilter>(filter)
+    }
+
     fun saveViewToImage(view: View, path: String): Boolean {
         view.isDrawingCacheEnabled = true
         view.drawingCacheQuality = View.DRAWING_CACHE_QUALITY_HIGH
@@ -39,7 +87,7 @@ object UiUtil {
         return saveBitmapToFile(cache, path)
     }
 
-    private fun saveBitmapToFile(cache: Bitmap, path: String): Boolean {
+    fun saveBitmapToFile(cache: Bitmap, path: String): Boolean {
         var fos: FileOutputStream? = null
         try {
             var file = File(path)
@@ -83,7 +131,7 @@ object UiUtil {
         return popup
     }
 
-    private fun loadBitmapFromView(v: View): Bitmap {
+    fun loadBitmapFromView(v: View): Bitmap {
         var w = v.width
         var h = v.height
         var bmp = Bitmap.createBitmap(w, h, Bitmap.Config.ARGB_8888)

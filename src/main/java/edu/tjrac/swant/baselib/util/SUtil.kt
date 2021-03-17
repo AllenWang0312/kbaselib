@@ -66,8 +66,33 @@ class SUtil private constructor() {
             val pattern = Pattern.compile("^[-\\+]?[.\\d]*$")
             return pattern.matcher(str).matches()
         }
-
-
+        val support_images = arrayOf(".jpg", ".jpeg", ".svg", ".png")
+        val support_audios = arrayOf(".mp3", ".wma", ".flv", ".mpg", ".mov", ".mkv")
+        val support_videos = arrayOf(".mp4", ".avi", ".mpeg", ".wmv", ".mov", ".rmvb", ".rm", ".flv", ".3gp")
+        fun isSupportAuido(link: String?): Boolean {
+            for (i in support_audios) {
+                if (link?.toLowerCase()?.endsWith(i)!!) {
+                    return true
+                }
+            }
+            return false
+        }
+        fun isSupportImage(link: String?): Boolean {
+            for (i in support_images) {
+                if (link?.toLowerCase()?.endsWith(i)!!) {
+                    return true
+                }
+            }
+            return false
+        }
+        fun isSupportVideo(link: String?): Boolean {
+            for (i in support_videos) {
+                if (link?.toLowerCase()?.endsWith(i)!!) {
+                    return true
+                }
+            }
+            return false
+        }
         fun isSupportPhoneNum(type: String, phone: String): Boolean {
             var pattern = ""
             when (type) {
@@ -108,7 +133,7 @@ class SUtil private constructor() {
                 Log.i("isMobileNo", type + "_" + mobiles + false)
                 return false
             } else {
-                var result = mobiles.matches(telRegex.toRegex())
+                val result = mobiles.matches(telRegex.toRegex())
                 Log.i("isMobileNo", type + "_" + mobiles + result)
 
                 return result

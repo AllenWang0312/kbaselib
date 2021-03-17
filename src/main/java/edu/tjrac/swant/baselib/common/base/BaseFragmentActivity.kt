@@ -50,10 +50,13 @@ open class BaseFragmentActivity : FragmentActivity(), BaseView {
     }
 
     override fun showProgressDialog() {
-        showProgressDialog("")
+        showProgressDialog("",true)
+    }
+    override fun showProgressDialog(cancelable: Boolean) {
+        showProgressDialog("",cancelable)
     }
 
-    override fun showProgressDialog(text: String) {
+    override fun showProgressDialog(text: String,cancelable:Boolean) {
         if (null != mContext) {
             if (progress == null) {
                 var view = LayoutInflater.from(mContext).inflate(R.layout.progress, null)
@@ -68,6 +71,7 @@ open class BaseFragmentActivity : FragmentActivity(), BaseView {
             } else {
                 tv_progress.visibility = View.GONE
             }
+            progress?.setCancelable(cancelable)
             progress!!.show()
         }
     }

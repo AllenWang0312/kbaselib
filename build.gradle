@@ -23,6 +23,10 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    compileOptions {
+        sourceCompatibility = 1.8
+        targetCompatibility = 1.8
+    }
 }
 
 dependencies {
@@ -34,9 +38,12 @@ dependencies {
 //    api 'androidx.navigation:navigation-fragment:2.3.2'
     api 'androidx.navigation:navigation-fragment-ktx:2.3.2'
 
+    api 'com.jaeger.statusbarutil:library:1.5.1'
     
     api 'com.squareup.retrofit2:adapter-rxjava:2.3.0'
     api 'com.squareup.retrofit2:converter-gson:2.3.0'
+    api 'io.reactivex:rxandroid:1.2.1'
+
     api 'com.squareup.okhttp3:okhttp:3.10.0'
     api 'com.squareup.okhttp3:logging-interceptor:3.8.1'
     //json解析
